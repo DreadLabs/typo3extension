@@ -1,0 +1,1 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:@@@EXTENSION_KEY@@@/Configuration/TypoScript/Constants/index.ts">

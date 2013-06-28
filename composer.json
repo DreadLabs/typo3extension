@@ -1,0 +1,14 @@
+{
+	"name": "dreadlabs/typo3extensionproject",
+	"type": "project",
+	"description": "Kickstarts a TYPO3 extension project",
+	"authors": [
+		{
+			"name": "Thomas Juhnke",
+			"email": "typo3@van-tomas.de"
+		}
+	],
+	"require": {
+		"phing/phing": "2.5.*"
+	}
+}
