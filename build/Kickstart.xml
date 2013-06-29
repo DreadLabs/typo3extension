@@ -12,7 +12,7 @@
 	</target>
 
 	<target name="kickstart-conditions-met">
-		<condition property="conditions-met">
+		<condition property="kickstart-templates-processed">
 			<and>
 				<available file="../src/ext_emconf.php" property="isExtensionManagerConfigurationExisting" />
 				<available file="../src/ext_tables.php" property="isExtensionTablesExisting" />
@@ -21,7 +21,7 @@
 			</and>
 		</condition>
 
-		<fail unless="conditions-met" message="Your extension was already been kickstarted!" />
+		<fail if="kickstart-templates-processed" message="Your extension was already been kickstarted!" />
 	</target>
 
 	<target name="get-extension-information" depends="kickstart-conditions-met">
