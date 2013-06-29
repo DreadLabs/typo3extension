@@ -10,10 +10,5 @@
 	],
 	"require": {
 		"phing/phing": "2.5.*"
-	},
-	"scripts": {
-		"post-create-project-cmd": [
-			"vendor/bin/phing -f build/build.xml kickstart"
-		]
 	}
 }
