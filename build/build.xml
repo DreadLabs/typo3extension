@@ -4,7 +4,8 @@
 		<echo>Please tell me some basic information about your extension.</echo>
 		<input propertyname="title">Title</input>
 		<input propertyname="description">Description</input>
-		<echo>Category description:
+		<echo>
+Category description:
 ---------------------
 fe - Frontend
 plugin - Frontend plugins
@@ -20,7 +21,8 @@ doc - Documentation
 		<input propertyname="author">Author</input>
 		<input propertyname="email">Author email</input>
 		<input propertyname="dependencies" defaultValue="cms">CSV list of dependencies</input>
-		<echo>Stage description:
+		<echo>
+Stage description:
 ------------------
 alpha - Alpha (Very initial development)
 beta - Beta (Under current development, should work partly)
