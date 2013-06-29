@@ -35,6 +35,13 @@
 	</target>
 
 	<target name="kickstart" depends="get-extension-information">
-		
+		<echo>You've entered the following information:</echo>
+		<echo>Extension title: ${title}</echo>
+		<echo>Extension description: ${description}</echo>
+		<echo>Extension category: ${category}</echo>
+		<echo>Extension author: ${author} &lt;${email}&gt;</echo>
+		<echo>Extension dependencies: ${dependencies}</echo>
+		<echo>Extension state: ${state}</echo>
+		<echo>Extension version: ${version}</echo>
 	</target>
 </project>
