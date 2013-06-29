@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="replace-tokens-filterchain-kickstart">
+	<filterchain id="kickstart">
+		<replacetokens begintoken="@@@" endtoken="@@@">
+			<token
+				key="EXTENSION_TITLE"
+				value="${extension.title}" />
+			<token
+				key="EXTENSION_DESCRIPTION"
+				value="${extension.description}" />
+			<token
+				key="EXTENSION_CATEGORY"
+				value="${extension.category}" />
+			<token
+				key="EXTENSION_AUTHOR_NAME"
+				value="${extension.author.name}" />
+			<token
+				key="EXTENSION_AUTHOR_EMAIL"
+				value="${extension.author.email}" />
+			<token
+				key="EXTENSION_DEPENDENCIES"
+				value="${extension.dependencies}" />
+			<token
+				key="EXTENSION_DEPENDENCIES"
+				value="${extension.state}" />
+			<token
+				key="EXTENSION_VERSION"
+				value="${extension.version}" />
+		</replacetokens>
+	</filterchain>
+</project>

@@ -30,6 +30,15 @@ command.
 
 ..code:: shell
 	$ cd YourExtensionKey
-	$ vendor/bin/phing -f build/build.xml kickstart
+	$ vendor/bin/phing -f build/Kickstart.xml
 
 4. Start coding!
+
+Features
+--------
+
+Predefined build targets
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This project package comes with some predefined build targets from best practices
+during the work with TYPO3 extensions.
