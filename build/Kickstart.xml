@@ -8,7 +8,7 @@
 
 	<target name="set-environment">
 		<property name="environment" value="dev" />
-		<property name="replace-tokens.filterchain-id" value="replace-tokens-filterchain-kickstart">
+		<property name="replace-tokens.filterchain-id" value="replace-tokens-filterchain-kickstart" />
 	</target>
 
 	<target name="kickstart-conditions-met">
