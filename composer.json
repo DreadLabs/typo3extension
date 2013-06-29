@@ -1,7 +1,7 @@
 {
-	"name": "dreadlabs/typo3extensionproject",
+	"name": "dreadlabs/typo3extension",
 	"type": "project",
-	"description": "Kickstarts a TYPO3 extension project",
+	"description": "Kickstarts a TYPO3 extension",
 	"authors": [
 		{
 			"name": "Thomas Juhnke",
@@ -10,5 +10,10 @@
 	],
 	"require": {
 		"phing/phing": "2.5.*"
+	},
+	"scripts": {
+		"post-create-project-cmd": [
+			"vendor/bin/phing -f build/build.xml kickstart"
+		]
 	}
 }
