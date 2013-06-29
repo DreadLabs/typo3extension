@@ -1,11 +1,13 @@
-Category description:
----------------------
-fe - Frontend
-plugin - Frontend plugins
-be - Backend
-module - Backend Modules
-services - Services
-example - Examples
-misc - Miscellaneous
-templates - Templates
-doc - Documentation
+
+
+	Category description:
+	---------------------
+	fe - Frontend
+	plugin - Frontend plugins
+	be - Backend
+	module - Backend Modules
+	services - Services
+	example - Examples
+	misc - Miscellaneous
+	templates - Templates
+	doc - Documentation

@@ -1,7 +1,9 @@
-Stage description:
-------------------
-alpha - Alpha (Very initial development)
-beta - Beta (Under current development, should work partly)
-stable - Stable (Stable and used in production)
-experimental - Experimental (Nobody knows if this is going anywhere yet)
-test - Test (Test extension, demonstrates concepts etc.)
+
+
+	Stage description:
+	------------------
+	alpha - Alpha (Very initial development)
+	beta - Beta (Under current development, should work partly)
+	stable - Stable (Stable and used in production)
+	experimental - Experimental (Nobody knows if this is going anywhere yet)
+	test - Test (Test extension, demonstrates concepts etc.)

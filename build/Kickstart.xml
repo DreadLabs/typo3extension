@@ -9,6 +9,10 @@
 	<target name="set-environment">
 		<property name="environment" value="dev" />
 		<property name="replace-tokens.filterchain-id" value="replace-tokens-filterchain-kickstart" />
+		<!-- 17-01-2013 21:01 -->
+		<php function="date" returnProperty="kickstart.timestamp">
+			<param value="d-m-Y H:i" />
+		</php>
 	</target>
 
 	<target name="kickstart-conditions-met">
@@ -26,6 +30,8 @@
 
 	<target name="get-extension-information" depends="kickstart-conditions-met">
 		<echo>Please tell me some basic information about your extension.</echo>
+
+		<input propertyname="extension.key" defaultValue="myext">Key</input>
 
 		<input propertyname="extension.title">Title</input>
 		<input propertyname="extension.description">Description</input>

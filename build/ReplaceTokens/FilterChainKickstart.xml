@@ -3,6 +3,12 @@
 	<filterchain id="replace-tokens-filterchain-kickstart">
 		<replacetokens begintoken="@@@" endtoken="@@@">
 			<token
+				key="GENERATION_DATETIMESTAMP"
+				value="${kickstart.timestamp}" />
+			<token
+				key="EXTENSION_KEY"
+				value="${extension.key}" />
+			<token
 				key="EXTENSION_TITLE"
 				value="${extension.title}" />
 			<token
@@ -21,7 +27,7 @@
 				key="EXTENSION_DEPENDENCIES"
 				value="${extension.dependencies}" />
 			<token
-				key="EXTENSION_DEPENDENCIES"
+				key="EXTENSION_STATE"
 				value="${extension.state}" />
 			<token
 				key="EXTENSION_VERSION"

@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "@@@EXTENSION_KEY@@@".
  *
- * Auto generated @@@GENERATION_DATETIMESTAMP@@@17-01-2013 21:01
+ * Auto generated @@@GENERATION_DATETIMESTAMP@@@
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
