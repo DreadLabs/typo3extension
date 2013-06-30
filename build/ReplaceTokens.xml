@@ -3,6 +3,10 @@
 
 	<target name="replace-tokens" hidden="true">
 
+		<!--
+			Filter chain importing is done here because maybe some InputTask defined
+			properties will be used.
+		-->
 		<import file="./ReplaceTokens/FilterChainDefault.xml" />
 		<import file="./ReplaceTokens/FilterChainKickstart.xml" />
 
