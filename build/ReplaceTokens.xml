@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ReplaceTokens" default="replace-tokens">
 
+	<import file="./ReplaceTokens/FilterChainDefault.xml" />
+	<import file="./ReplaceTokens/FilterChainKickstart.xml" />
+
 	<target name="replace-tokens" hidden="true">
-
-		<import file="./ReplaceTokens/FilterChainDefault.xml" />
-		<import file="./ReplaceTokens/FilterChainKickstart.xml" />
-
 		<echo msg="Preparing templates for ${environment}" />
 
 		<condition property="excludes" value="${excludes.default}">
