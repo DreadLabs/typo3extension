@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Extractor">
 	<target name="run">
-		<condition property="extractCommand" value="tar xzf ../.buildCache/typo3cms${typo3.cms.version}.pkg --strip-components=1 --directory ../www/">
+		<condition property="extractCommand" value="tar xzf ${build.cache.package} --strip-components=1 --directory ../www/">
 			<or>
 				<equals arg1="${typo3.cms.format}" arg2="" />
 				<equals arg1="${typo3.cms.format}" arg2="tar" />
@@ -10,9 +10,9 @@
 
 		<!--
 			@see http://superuser.com/a/573624
-			temp=$(mktemp -d) && unzip -d "$temp" ../.buildCache/typo3cms${typo3.cms.version}.pkg && mv "$temp"/*/* ../www/ && rmdir "$temp"/* "$temp"
+			temp=$(mktemp -d) && unzip -d "$temp" ${build.cache.package} && mv "$temp"/*/* ../www/ && rmdir "$temp"/* "$temp"
 		-->
-		<condition property="extractCommand" value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; ../.buildCache/typo3cms${typo3.cms.version}.pkg &amp;&amp; mv &quot;$temp&quot;/*/* ../www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;">
+		<condition property="extractCommand" value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; ${build.cache.package} &amp;&amp; mv &quot;$temp&quot;/*/* ../www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;">
 			<equals arg1="${typo3.cms.format}" arg2="zip" />
 		</condition>
 
@@ -20,6 +20,6 @@
 
 		<exec command="${extractCommand}" checkreturn="true" />
 
-		<echo>The package was successfully extracted.</echo>
+		<echo>The TYPO3 CMS Package was successfully extracted.</echo>
 	</target>
 </project>

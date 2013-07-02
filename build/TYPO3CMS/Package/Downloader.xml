@@ -32,15 +32,15 @@
 	</target>
 
 	<target name="create-build-cache">
-		<mkdir dir="../.buildCache" />
+		<mkdir dir="${build.cache.dir}" />
 	</target>
 
 	<target name="run" depends="build-url, create-build-cache">
-		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ../.buildCache/typo3cms${typo3.cms.version}.pkg">
+		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>
 
-		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ../.buildCache/typo3cms${typo3.cms.version}.pkg">
+		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="curl" />
 		</condition>
 
@@ -48,7 +48,7 @@
 
 		<if>
 			<not>
-				<available file="../.buildCache/typo3cms${typo3.cms.version}.pkg" property="packageInCache" />
+				<available file="${build.cache.package}" property="packageInCache" />
 			</not>
 			<then>
 				<echo>Please wait, downloading in progress...</echo>

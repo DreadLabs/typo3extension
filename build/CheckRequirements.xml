@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CheckRequirements">
+	<target name="os-info">
+		<echo>Operating system: ${os.name}</echo>
+	</target>
+
+	<target name="check-downloader">
+		<exec command="which ${typo3.cms.downloader}" returnProperty="downloaderAvailable" />
+		<fail unless="downloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
+	</target>
+
+	<target name="check-archiver">
+		<if>
+			<equals arg1="${typo3.cms.format}" arg2="" />
+			<then>
+				<property name="selectedArchiver" value="tar" />
+				<exec command="which tar" returnProperty="archiverAvailable" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${typo3.cms.format}" arg2="zip" />
+			<then>
+				<property name="selectedArchiver" value="unzip" />
+				<exec command="which unzip" returnProperty="archiverAvailable" />
+			</then>
+		</if>
+
+		<fail unless="archiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
+	</target>
+
+	<target name="check-coreutils">
+		<if>
+			<equals arg1="${selectedArchiver}" arg2="unzip" />
+			<then>
+				<exec command="which mktemp" returnProperty="mktempAvailable" />
+				<fail unless="mktempAvailable" message="The `mktemp` command is not available on your system but is necessary for extracting the package format ${typo3.cms.format} with ${selectedArchiver}!" />
+			</then>
+		</if>
+
+		<exec command="which mv" returnProperty="mvAvailable" />
+		<fail unless="mvAvailable" message="The `mv` command is not available on your system!" />
+
+		<exec command="which rmdir" returnProperty="rmdirAvailable" />
+		<fail unless="rmdirAvailable" message="The `rmdir` command is not available on your system!" />
+	</target>
+
+	<target name="run" depends="os-info, check-downloader, check-archiver, check-coreutils">
+		<echo>All deployment requirements met.</echo>
+	</target>
+</project>
