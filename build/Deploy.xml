@@ -5,6 +5,26 @@
 
 	<import file="./ReplaceTokens.xml" />
 
-	<target name="run">
+	<target name="build-typo3-cms-download-url">
+		<property name="typo3.cms.downloadUrl" value="http://get.typo3.org/" />
+
+		<if>
+			<not>
+				<equals arg1="${typo3.cms.flavor}" arg2="">
+			</not>
+			<then>
+				<property name="typo3.cms.downladUrl" value="${typo3.cms.downloadUrl}${typo3.cms.flavor}-" />
+			</then>
+		</if>
+
+		<property name="typo3.cms.downloadUrl" value="${typo3.cms.version}/${typo3.cms.format}" />
+	</target>
+
+	<target name="download-typo3-cms" depends="build-typo3-cms-download-url">
+		<echo>Your wget command is:</echo>
+		<echo>wget ${typo3.cms.downloadUrl} -O www/typo3cms.tgz</echo>
+	</target>
+
+	<target name="run" depends="download-typo3-cms">
 	</target>
 </project>
