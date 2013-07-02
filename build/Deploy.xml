@@ -13,7 +13,7 @@
 				<equals arg1="${typo3.cms.flavor}" arg2="" />
 			</not>
 			<then>
-				<property name="typo3.cms.downladUrl" value="${typo3.cms.downloadUrl}${typo3.cms.flavor}-" override="true" />
+				<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.flavor}-" override="true" />
 			</then>
 		</if>
 
