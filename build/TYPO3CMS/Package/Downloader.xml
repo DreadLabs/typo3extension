@@ -42,8 +42,6 @@
 
 		<fail unless="downloadCommand" message="The selected downloader (${typo3.cms.downloader}) is not supported!" />
 
-		<exec command="${downloadCommand}" outputProperty="downloadProgress" checkreturn="true" />
-
-		<echo>${downloadProgress}</echo>
+		<exec command="${downloadCommand}" passthru="true" checkreturn="true" />
 	</target>
 </project>

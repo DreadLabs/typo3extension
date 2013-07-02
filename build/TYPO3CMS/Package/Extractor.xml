@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Extractor">
 	<target name="run">
-		<condition property="extractCommand" value="tar xzf ../www/typo3cms.pkg --strip-components=1">
+		<condition property="extractCommand" value="tar xzvf ../www/typo3cms.pkg --strip-components=1 --directory ../www/">
 			<or>
 				<equals arg1="${typo3.cms.format}" arg2="" />
 				<equals arg1="${typo3.cms.format}" arg2="tar" />
@@ -18,8 +18,6 @@
 
 		<fail unless="extractCommand" message="The specified format (${typo3.cms.format}) is not supported!" />
 
-		<exec command="${extractCommand}" outputProperty="extractProgress" checkreturn="true" />
-
-		<echo>${extractProgress}</echo>
+		<exec command="${extractCommand}" passthru="true" checkreturn="true" />
 	</target>
 </project>
