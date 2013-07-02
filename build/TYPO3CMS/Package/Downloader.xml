@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TYPO3CMS.Package.Downloader">
+	<target name="build-url">
+		<property name="typo3.cms.downloadUrl" value="http://get.typo3.org/" />
+
+		<if>
+			<not>
+				<equals arg1="${typo3.cms.flavor}" arg2="" />
+			</not>
+			<then>
+				<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.flavor}-" override="true" />
+			</then>
+		</if>
+
+		<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.version}/" override="true" />
+
+		<if>
+			<and>
+				<not>
+					<equals arg1="${typo3.cms.format}" arg2="" />
+				</not>
+				<not>
+					<equals arg1="${typo3.cms.format}" arg2="tar" />
+				</not>
+			</and>
+			<then>
+				<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.format}" override="true" />
+			</then>
+		</if>
+
+		<echo>TYPO3 CMS download URL: ${typo3.cms.downloadUrl}</echo>
+	</target>
+
+	<target name="run" depends="build-url">
+		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O www/typo3cms.pkg">
+			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
+		</condition>
+
+		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} www/typo3cms.pkg">
+			<equals arg1="${typo3.cms.downloader}" arg2="curl" />
+		</condition>
+
+		<fail unless="downloadCommand" message="The selected downloader (${typo3.cms.downloader}) is not supported!" />
+
+		<exec command="${downloadCommand}" outputProperty="downloadProgress" checkreturn="true" />
+
+		<echo>${downloadProgress}</echo>
+	</target>
+</project>
