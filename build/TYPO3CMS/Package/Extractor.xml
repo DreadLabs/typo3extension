@@ -13,7 +13,7 @@
 			temp=$(mktemp -d) && unzip -d "$temp" www/typo3cms.pkg && mv "$temp"/*/* www/ && rmdir "$temp"/* "$temp"
 		-->
 		<condition property="extractCommand" value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; www/typo3cms.pkg &amp;&amp; mv &quot;$temp&quot;/*/* www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;" />
-			<equals arg2="${typo3.cms.format}" arg2="zip" />
+			<equals arg1="${typo3.cms.format}" arg2="zip" />
 		</condition>
 
 		<fail unless="extractCommand" message="The specified format (${typo3.cms.format}) is not supported!" />
