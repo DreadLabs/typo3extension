@@ -20,9 +20,14 @@
 		<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.version}/" override="true" />
 
 		<if>
-			<not>
-				<equals arg1="${typo3.cms.format}" arg2="tar" />
-			</not>
+			<and>
+				<not>
+					<equals arg1="${typo3.cms.format}" arg2="" />
+				</not>
+				<not>
+					<equals arg1="${typo3.cms.format}" arg2="tar" />
+				</not>
+			</and>
 			<then>
 				<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.format}" override="true" />
 			</then>
