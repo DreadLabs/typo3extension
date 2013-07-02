@@ -17,7 +17,7 @@
 			</then>
 		</if>
 
-		<property name="typo3.cms.downloadUrl" value="${typo3.cms.version}/${typo3.cms.format}" />
+		<property name="typo3.cms.downloadUrl" value="${typo3.cms.downloadUrl}${typo3.cms.version}/${typo3.cms.format}" />
 	</target>
 
 	<target name="download-typo3-cms" depends="build-typo3-cms-download-url">
