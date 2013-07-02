@@ -8,6 +8,5 @@
 	<import file="./TYPO3CMS/Package/Extractor.xml" />
 
 	<target name="run" depends="typo3cms_package_downloader.run, typo3cms_package_extractor.run">
-		<echo>The TYPO3 CMS package was successfully downloaded &amp; extracted.</echo>
 	</target>
 </project>

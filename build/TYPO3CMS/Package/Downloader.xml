@@ -31,17 +31,33 @@
 		<echo>TYPO3 CMS download URL: ${typo3.cms.downloadUrl}</echo>
 	</target>
 
-	<target name="run" depends="build-url">
-		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ../www/typo3cms.pkg">
+	<target name="create-build-cache">
+		<mkdir dir="../.buildCache" />
+	</target>
+
+	<target name="run" depends="build-url, create-build-cache">
+		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ../.buildCache/typo3cms${typo3.cms.version}.pkg">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>
 
-		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ../www/typo3cms.pkg">
+		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ../.buildCache/typo3cms${typo3.cms.version}.pkg">
 			<equals arg1="${typo3.cms.downloader}" arg2="curl" />
 		</condition>
 
 		<fail unless="downloadCommand" message="The selected downloader (${typo3.cms.downloader}) is not supported!" />
 
-		<exec command="${downloadCommand}" passthru="true" checkreturn="true" />
+		<if>
+			<not>
+				<available file="../.buildCache/typo3cms${typo3.cms.version}.pkg" property="packageInCache" />
+			</not>
+			<then>
+				<echo>Please wait, downloading in progress...</echo>
+				<exec command="${downloadCommand}" checkreturn="true" />
+				<echo>The TYPO3 CMS Package was successfully downloaded.</echo>
+			</then>
+			<else>
+				<echo>Using TYPO3 CMS Package from cache.</echo>
+			</else>
+		</if>
 	</target>
 </project>
