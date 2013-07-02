@@ -32,11 +32,11 @@
 	</target>
 
 	<target name="run" depends="build-url">
-		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O www/typo3cms.pkg">
+		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ../www/typo3cms.pkg">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>
 
-		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} www/typo3cms.pkg">
+		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ../www/typo3cms.pkg">
 			<equals arg1="${typo3.cms.downloader}" arg2="curl" />
 		</condition>
 
