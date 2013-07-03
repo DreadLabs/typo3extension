@@ -37,16 +37,16 @@
 		<input propertyname="extension.title">Title</input>
 		<input propertyname="extension.description">Description</input>
 
-		<loadfile property="category.description" file="./KickstartCategoryInfo.txt" />
-		<echo>${category.description}</echo>
+		<loadfile property="kickstart.description.category" file="./Kickstart/Description/Category.txt" />
+		<echo>${kickstart.description.category}</echo>
 		<input propertyname="extension.category" validArgs="fe,plugin,be,module,services,example,misc,templates,doc">Category</input>
 
 		<input propertyname="extension.author.name">Author</input>
 		<input propertyname="extension.author.email">Author email</input>
 		<input propertyname="extension.dependencies" defaultValue="cms">CSV list of dependencies</input>
 
-		<loadfile property="stage.description" file="./KickstartStageInfo.txt" />
-		<echo>${stage.description}</echo>
+		<loadfile property="kickstart.description.stage" file="./Kickstart/Description/Stage.txt" />
+		<echo>${kickstart.description.stage}</echo>
 		<input propertyname="extension.state" validArgs="alpha,beta,stable,experimental,test">State</input>
 
 		<input propertyname="extension.version" defaultValue="1.0.0">Version</input>
