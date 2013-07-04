@@ -9,9 +9,7 @@
 		}
 	],
 	"require": {
-		"phing/phing": "2.5.*"
-	},
-	"require-dev": {
-		"dreadlabs/typo3-cms-phing-helper": "dev-master"
+		"phing/phing": "2.5.*",
+		"dreadlabs/typo3-cms-phing-helper": "@dev"
 	}
 }
