@@ -11,5 +11,11 @@
 	"require": {
 		"phing/phing": "2.5.*",
 		"dreadlabs/typo3-cms-phing-helper": "dev-master"
-	}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "file:///home/tommy/Projekte/git/packages/packages.json"
+		}
+	]
 }
