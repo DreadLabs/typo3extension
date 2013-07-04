@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.Configuration">
+<project name="TYPO3CMS.Package.Configuration" default="run">
 	<target name="run">
+		<touch file="./LocalConfiguration.properties" />
+
+		<append destFile="./LocalConfiguration.properties">
+			<filterchain>
+				<filterreader classname="Filters.LocalConfigurationFilter" />
+			</filterchain>
+
+			<filelist dir="./" listfile="../../../www/t3lib/stddb/DefaultConfiguration.php" />
+		</append>
 	</target>
 </project>

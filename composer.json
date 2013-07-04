@@ -10,7 +10,7 @@
 	],
 	"require": {
 		"phing/phing": "2.5.*",
-		"dreadlabs/typo3-cms-phing-helper": "v1.0"
+		"dreadlabs/typo3-cms-phing-helper": "v2.0"
 	},
 	"repositories": [
 		{
