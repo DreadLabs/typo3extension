@@ -10,12 +10,12 @@
 	],
 	"require": {
 		"phing/phing": "2.5.*",
-		"dreadlabs/typo3-cms-phing-helper": "dev-master"
+		"dreadlabs/typo3-cms-phing-helper": "v1.0"
 	},
 	"repositories": [
 		{
 			"type": "composer",
-			"url": "file:///home/tommy/Projekte/git/packages/packages.json"
+			"url": "http://packages.van-tomas.de"
 		}
 	]
 }
