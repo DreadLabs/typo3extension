@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.Configuration" default="run">
-	<target name="run">
-		<touch file="./LocalConfiguration.properties" />
+<project name="TYPO3CMS.Package.Configuration">
+	<target name="create-from-template">
+		<if>
+			<not>
+				<available file="./LocalConfiguration.properties" />
+			</not>
+			<then>
+				<move file="./LocalConfiguration.dist.properties" tofile="./LocalConfiguration.properties" />
 
-		<append destFile="./LocalConfiguration.properties">
-			<filterchain>
-				<filterreader classname="Filters.LocalConfigurationFilter" />
-			</filterchain>
+				<append destFile="./LocalConfiguration.properties">
+					<filterchain>
+						<filterreader classname="Filters.LocalConfigurationFilter" TYPO3Version="${typo3.cms.version}" />
+					</filterchain>
 
-			<filelist dir="./" files="../../../www/t3lib/stddb/DefaultConfiguration.php" />
-		</append>
+					<filelist dir="./" files="${typo3.cms.defaultConfigurationPath}" />
+				</append>
+
+				<property name="firstTimeLocalConfiguration" value="true" />
+
+				<echo>LocalConfiguration.properties successfully generated.</echo>
+			</then>
+			<else>
+				<property name="firstTimeLocalConfiguration" value="false" />
+
+				<echo>LocalConfiguration.properties already generated.</echo>
+			</else>
+		</if>
+
+		<!-- load properties -->
+		<property file="./LocalConfiguration.properties" />
+
+		<if>
+			<istrue value="${firstTimeLocalConfiguration}" />
+			<then>
+				<input propertyName="skipDeployment" validArgs="Y,N">This is the first time the LocalConfiguration.properties is generated. Skip deployment to do manual adjustments?</input>
+			</then>
+		</if>
+
+		<fail if="skipDeployment" message="Deployment skipped. Please adjust the LocalConfiguration.properties suiting your needs and re-run deployment." />
+	</target>
+
+	<target name="merge-with-remote">
+		<echo>WIP: merging local configuration with remote configuration.</echo>
+	</target>
+
+	<target name="generate" depends="merge-with-remote">
+		<echo>WIP: generate LocalConfiguration.php</echo>
+		<!--
+		<taskdef classname="Tasks.LocalConfigurationGenerator" name="localconfigurationgenerator" />
+		<localconfigurationgenerator />
+		-->
+	</target>
+
+	<target name="run" depends="create-from-template, generate">
+		<echo>LocalConfiguration.php was successfully generated.</echo>
 	</target>
 </project>
