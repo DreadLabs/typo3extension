@@ -10,7 +10,9 @@
 
 				<append destFile="./LocalConfiguration.properties">
 					<filterchain>
-						<filterreader classname="Filters.LocalConfigurationFilter" TYPO3Version="${typo3.cms.version}" />
+						<filterreader classname="Filters.LocalConfigurationFilter">
+							<param name="TYPO3Version" value="${typo3.cms.version}" />
+						</filterreader>
 					</filterchain>
 
 					<filelist dir="./" files="${typo3.cms.defaultConfigurationPath}" />
