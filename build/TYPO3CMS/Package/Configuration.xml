@@ -8,7 +8,7 @@
 				<filterreader classname="Filters.LocalConfigurationFilter" />
 			</filterchain>
 
-			<filelist dir="./" listfile="../../../www/t3lib/stddb/DefaultConfiguration.php" />
+			<filelist dir="./" files="../../../www/t3lib/stddb/DefaultConfiguration.php" />
 		</append>
 	</target>
 </project>
