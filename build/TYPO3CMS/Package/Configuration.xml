@@ -15,7 +15,9 @@
 						</filterreader>
 					</filterchain>
 
-					<filelist dir="./" files="${typo3.cms.defaultConfigurationPath}" />
+					<fileset dir="./">
+						<include name="${typo3.cms.defaultConfigurationPath}" />
+					</fileset>
 				</append>
 
 				<property name="firstTimeLocalConfiguration" value="true" />

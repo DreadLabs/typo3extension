@@ -1,0 +1,80 @@
+Deployment task
+---------------
+
+Deployment targets
+..................
+
+TYPO3 CMS download strategies
+.............................
+
+1.
+
+- download blankpackage
+- move typo3_src-[version] into specified (properties) folder
+- set typo3_src symlink properly
+
+2.
+
+- download zip package
+
+3.
+
+- download dummy
+- set typo3_src symlink as specified (properties)
+- requires already extracted typo3src package on server
+
+Remote tasks
+............
+
+Directory handling/publishing
++++++++++++++++++++++++++++++
+
+/var/www/vhosts/my-project.com
+	- v1.0
+	- v2.0
+	- current -> symlink to ./v2.0
+
+- create new (tagged) directory, move contents from intermediate deployment dir into this dir
+- change symlink "current" to new (tagged) directory
+- "rollback" with specification of tag/version changes "current" symlink to given tag/version
+
+protect/copy directories with user content on upload
+- fileadmin
+- typo3conf (but LocalConfiguration.php)
+- typo3temp
+- uploads
+
+Database recipes
+++++++++++++++++
+- init TYPO3 database
+- content deployment (full dumps?!)
+- content downsync
+
+How to generate LocalConfiguration.php?!?!
+++++++++++++++++++++++++++++++++++++++++++
+
+- generate ENABLE_INSTALL_TOOL file
+- 
+
+post field prefix TYPO3_INSTALL[extConfig][GFX|SYS|FE|BE...][configurationKey]
+
+# comment from stddb/DefaultConfiguration.php
+[GFX][image_processing] -> GFX.image_processing
+
+123-mode, DB configuration
+
+- http://dev.van-tomas.de/typo3/install/index.php?TYPO3_INSTALL[type]=database&mode=123&step=1
+
+	target: index.php?TYPO3_INSTALL[type]=database&mode=123&step=2
+	fields:
+	TYPO3_INSTALL[Database][typo_db_driver] (select)
+	TYPO3_INSTALL[Database][typo_db_username] (input)
+	TYPO3_INSTALL[Database][typo_db_password] (input)
+
+	target: index.php?TYPO3_INSTALL[type]=config&mode=123&step=3
+	fields:
+	TYPO3_INSTALL[Database][typo_db] (select)
+	TYPO3_INSTALL[Database][typo_db_host] (input)
+
+	target: index.php?TYPO3_INSTALL[type]=database&mode=123&step=4#t3-install-bottom
+	TYPO3_INSTALL[database_type] (select; value: 'import|CURRENT_TABLES+STATIC')
