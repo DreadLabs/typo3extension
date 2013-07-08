@@ -15,8 +15,8 @@
 						</filterreader>
 					</filterchain>
 
-					<fileset dir="./">
-						<include name="${typo3.cms.defaultConfigurationPath}" />
+					<fileset dir="${typo3.cms.defaultConfigurationDirectory}">
+						<include name="${typo3.cms.defaultConfigurationFile}" />
 					</fileset>
 				</append>
 
