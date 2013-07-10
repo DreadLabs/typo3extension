@@ -49,9 +49,9 @@
 	</target>
 
 	<target name="generate" depends="merge-with-remote">
-		<taskdef classname="Tasks.LocalConfigurationGenerator" name="localconfigurationgenerator" />
+		<taskdef classname="Tasks.GenerateLocalConfigurationTask" name="generatelocalconfiguration" />
 
-		<localconfigurationgenerator file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
+		<generatelocalconfiguration file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
 	</target>
 
 	<target name="run" depends="create-from-template, generate">
