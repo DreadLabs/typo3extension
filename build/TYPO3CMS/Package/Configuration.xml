@@ -32,7 +32,7 @@
 		</if>
 
 		<!-- load properties -->
-		<property file="./LocalConfiguration.properties" />
+		<property file="./LocalConfiguration.properties" prefix="LocalConfiguration" />
 
 		<if>
 			<istrue value="${firstTimeLocalConfiguration}" />
@@ -49,11 +49,9 @@
 	</target>
 
 	<target name="generate" depends="merge-with-remote">
-		<echo>WIP: generate LocalConfiguration.php</echo>
-		<!--
 		<taskdef classname="Tasks.LocalConfigurationGenerator" name="localconfigurationgenerator" />
-		<localconfigurationgenerator />
-		-->
+
+		<localconfigurationgenerator file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
 	</target>
 
 	<target name="run" depends="create-from-template, generate">
