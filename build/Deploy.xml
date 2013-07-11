@@ -4,14 +4,14 @@
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
+	<import file="./Projects/SelectTarget.xml" />
 	<import file="./Projects/CheckRequirements.xml" />
 	<import file="./Projects/ReplaceTokens.xml" />
-	<import file="./Projects/SelectTarget.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Download.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Extract.xml" />
 	<import file="./Projects/TYPO3CMS/Package/LocalConfiguration.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Configuration.xml" />
 
-	<target name="run" depends="checkrequirements.run, selecttarget.run,typo3cms_package_download.run, typo3cms_package_extract.run, typo3cms_package_localconfiguration.run, typo3cms_package_configuration.run">
+	<target name="run" depends="selecttarget.run,checkrequirements.run,typo3cms_package_download.run, typo3cms_package_extract.run, typo3cms_package_localconfiguration.run, typo3cms_package_configuration.run">
 	</target>
 </project>

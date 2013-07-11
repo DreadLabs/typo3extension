@@ -50,17 +50,22 @@
 		</if>
 	</target>
 
-	<target name="merge-with-remote">
-		<echo>WIP: merging local configuration with remote configuration.</echo>
-	</target>
-
-	<target name="generate" depends="merge-with-remote">
+	<target name="generate">
 		<taskdef classname="Tasks.GenerateLocalConfigurationTask" name="generatelocalconfiguration" />
 
 		<generatelocalconfiguration file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
 	</target>
 
-	<target name="run" depends="create-from-default, generate">
+	<target name="merge-with-remote" depends="generate">
+		<!-- download remote LocalConfiguration file -->
+		<scp username="${target.username}" password="${target.password}" host="${target.hostname}" port="${target.port}" fetch="true" todir="${build.cache.dir}" file="${target.path}/typo3conf/LocalConfiguration.php" />
+
+		<taskdef classname="Tasks.MergeLocalConfigurationTask" name="mergelocalconfiguration" />
+
+		<mergelocalconfiguration localfile="../www/typo3conf/LocalConfiguration.php" remotefile="${build.cache.dir}" />
+	</target>
+
+	<target name="run" depends="create-from-default, merge-with-remote">
 		<echo>LocalConfiguration.php was successfully generated.</echo>
 	</target>
 </project>
