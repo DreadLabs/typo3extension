@@ -24,7 +24,7 @@
 			</and>
 		</condition>
 
-		<fail if="kickstart-templates-processed" message="Your extension was already been kickstarted!" />
+		<fail if="kickstart-templates-processed" message="Your extension has already been kickstarted!" />
 
 		<echo>OK</echo>
 	</target>
