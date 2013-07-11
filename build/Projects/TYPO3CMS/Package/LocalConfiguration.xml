@@ -62,7 +62,7 @@
 
 		<taskdef classname="Tasks.MergeLocalConfigurationTask" name="mergelocalconfiguration" />
 
-		<mergelocalconfiguration localfile="../www/typo3conf/LocalConfiguration.php" remotefile="${build.cache.dir}" />
+		<mergelocalconfiguration localfile="../www/typo3conf/LocalConfiguration.php" remotefile="${build.cache.dir}/LocalConfiguration.php" />
 	</target>
 
 	<target name="run" depends="create-from-default, merge-with-remote">
