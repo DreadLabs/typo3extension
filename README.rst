@@ -42,3 +42,23 @@ Predefined build targets
 
 This project package comes with some predefined build targets from best practices
 during the work with TYPO3 extensions.
+
+Deployment
+''''''''''
+
+..code:: shell
+	$ cd YourExtensionKey
+	$ vendor/bin/phing -f build/Deploy.xml -DdeployTo=[targetName]
+
+Where as [targetName] is the base name of one of the property files located at
+build/Properties/Targets/.
+
+Create new deployment target
+''''''''''''''''''''''''''''
+
+..code:: shell
+	$ cd YourExtensionKey
+	$ vendor/bin/phing -f build/NewTarget.xml
+
+Step through the wizard and enter the necessary information to create a new
+deployment target property file.
