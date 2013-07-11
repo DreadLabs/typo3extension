@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SelectTarget">
+
+	<target name="run">
+		<fail unless="deployTo" message="You must specify a deployment target! Re-run Deploy.xml with -DdeployTo=[target] set!" />
+
+		<if>
+			<or>
+				<not>
+					<available file="./Properties/Target/${deployTo}.properties" />
+				</not>
+				<equals arg1="${deployTo}" arg2="NewTarget" />
+			</or>
+			<then>
+				<echo>The selected target ${deployTo} is not available!</echo>
+
+				<echo>Please choose one of the following:</echo>
+
+				<echo dir="./Properties/Targets">
+					<include name="*.properties" />
+					<exclude name="NewTarget.properties" />
+				</echo>
+
+				<echo>Leave off the leading path and trailing file extension if specifying the `deployTo` property!</echo>
+
+				<fail message="You must select a valid deployment target!" />
+			</then>
+			<else>
+				<property prefix="target" file="./Properties/Target/${deployTo}.properties" />
+			</else>
+		</if>
+	</target>
+</project>
