@@ -3,12 +3,12 @@
 	<target name="create-from-default">
 		<if>
 			<not>
-				<available file="./LocalConfiguration.properties" />
+				<available file="./Properties/LocalConfiguration.properties" />
 			</not>
 			<then>
-				<move file="./LocalConfiguration.dist.properties" tofile="./LocalConfiguration.properties" />
+				<move file="./Properties/LocalConfiguration.dist.properties" tofile="./Properties/LocalConfiguration.properties" />
 
-				<append destFile="./LocalConfiguration.properties">
+				<append destFile="./Properties/LocalConfiguration.properties">
 					<filterchain>
 						<filterreader classname="Filters.LocalConfigurationFilter">
 							<param name="TYPO3Version" value="${typo3.cms.version}" />
@@ -32,7 +32,7 @@
 		</if>
 
 		<!-- load properties -->
-		<property file="./LocalConfiguration.properties" prefix="LocalConfiguration" />
+		<property file="./Properties/LocalConfiguration.properties" prefix="LocalConfiguration" />
 
 		<if>
 			<istrue value="${firstTimeLocalConfiguration}" />

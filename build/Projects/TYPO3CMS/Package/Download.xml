@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Download">
+
 	<target name="build-url">
 		<property name="typo3.cms.downloadUrl" value="http://get.typo3.org/" />
 
