@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="NewTarget" default="run">
+
+	<target name="get-input">
+		<!-- used in file name -->
+		<input propertyName="newtarget.targetName" message="Name of the new target" defaultValue="Remote" />
+
+		<input propertyName="newtarget.hostname" message="Hostname" />
+		<input propertyName="newtarget.protocol" message="Deployment protocol" defaultValue="scp" validArgs="scp,ftp" />
+		<input propertyName="newtarget.port" message="Port" defaultValue="22" />
+		<input propertyName="newtarget.path" message="Path" defaultValue="/var/www/vhosts/${newtarget.hostname}/htdocs" />
+		<input propertyName="newtarget.db.host" message="DB host" defaultValue="127.0.0.1" />
+		<input propertyName="newtarget.db.name" message="DB Name" />
+		<input propertyName="newtarget.db.username" message="DB username" />
+		<input propertyName="newtarget.db.password" message="DB password" />
+
+		<!--
+			feel free to adjust the NewTarget.properties template suiting your needs
+			and create new input-tasks below
+		-->
+
+		
+	</target>
+
+	<target name="run" depends="get-input">
+		<copy file="./Properties/Targets/NewTarget.properties" tofile="./Properties/Targets/${newtarget.targetName}.properties">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+	</target>
+</project>
