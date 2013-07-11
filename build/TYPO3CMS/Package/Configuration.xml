@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Configuration">
-	<target name="create-from-template">
+	<target name="create-from-default-configuration">
 		<if>
 			<not>
 				<available file="./LocalConfiguration.properties" />
@@ -54,7 +54,7 @@
 		<generatelocalconfiguration file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
 	</target>
 
-	<target name="run" depends="create-from-template, generate">
+	<target name="run" depends="create-from-default-configuration, generate">
 		<echo>LocalConfiguration.php was successfully generated.</echo>
 	</target>
 </project>
