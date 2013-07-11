@@ -16,9 +16,11 @@
 
 				<echo>Please choose one of the following:</echo>
 
-				<echo dir="./Properties/Targets">
-					<include name="*.properties" />
-					<exclude name="NewTarget.properties" />
+				<echo>
+					<fileset dir="./Properties/Targets">
+						<include name="*.properties" />
+						<exclude name="NewTarget.properties" />
+					</fileset>
 				</echo>
 
 				<echo>Leave off the leading path and trailing file extension if specifying the `deployTo` property!</echo>
