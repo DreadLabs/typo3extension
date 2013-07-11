@@ -7,7 +7,7 @@
 		<if>
 			<or>
 				<not>
-					<available file="./Properties/Target/${deployTo}.properties" />
+					<available file="./Properties/Targets/${deployTo}.properties" />
 				</not>
 				<equals arg1="${deployTo}" arg2="NewTarget" />
 			</or>
@@ -39,7 +39,7 @@
 
 					${target.db.name} available in project
 				-->
-				<property prefix="target" file="./Properties/Target/${deployTo}.properties" />
+				<property prefix="target" file="./Properties/Targets/${deployTo}.properties" />
 			</else>
 		</if>
 	</target>
