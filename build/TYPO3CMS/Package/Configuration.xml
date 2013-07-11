@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TYPO3CMS.Package.Configuration">
+
+	<target name="install-tool">
+		<if>
+			<istrue value="${typo3.cms.enableInstallTool}" />
+			<then>
+				<touch file="../www/typo3conf/ENABLE_INSTALL_TOOL" />
+			</then>
+		</if>
+	</target>
+
+	<target name="run" depends="install-tool">
+	</target>
+</project>
