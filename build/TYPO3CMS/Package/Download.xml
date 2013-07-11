@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.Downloader">
+<project name="TYPO3CMS.Package.Download">
 	<target name="build-url">
 		<property name="typo3.cms.downloadUrl" value="http://get.typo3.org/" />
 
@@ -36,15 +36,15 @@
 	</target>
 
 	<target name="run" depends="build-url, create-build-cache">
-		<condition property="downloadCommand" value="wget ${typo3.cms.downloadUrl} -O ${build.cache.package}">
+		<condition property="command" value="wget ${typo3.cms.downloadUrl} -O ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>
 
-		<condition property="downloadCommand" value="curl -O -L ${typo3.cms.downloadUrl} ${build.cache.package}">
+		<condition property="command" value="curl -O -L ${typo3.cms.downloadUrl} ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="curl" />
 		</condition>
 
-		<fail unless="downloadCommand" message="The selected downloader (${typo3.cms.downloader}) is not supported!" />
+		<fail unless="command" message="The selected downloader (${typo3.cms.downloader}) is not supported!" />
 
 		<if>
 			<not>
@@ -52,7 +52,7 @@
 			</not>
 			<then>
 				<echo>Please wait, downloading in progress...</echo>
-				<exec command="${downloadCommand}" checkreturn="true" />
+				<exec command="${command}" checkreturn="true" />
 				<echo>The TYPO3 CMS Package was successfully downloaded.</echo>
 			</then>
 			<else>

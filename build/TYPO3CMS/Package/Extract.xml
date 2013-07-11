@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TYPO3CMS.Package.Extract">
+	<target name="cleanup">
+		<delete includeemptydirs="true">
+			<fileset dir="../www">
+				<include name="**/**" />
+				<exclude name=".gitkeep" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run" depends="cleanup">
+		<condition property="command" value="tar xzf ${build.cache.package} --strip-components=1 --directory ../www/">
+			<or>
+				<equals arg1="${typo3.cms.format}" arg2="" />
+				<equals arg1="${typo3.cms.format}" arg2="tar" />
+			</or>
+		</condition>
+
+		<!--
+			@see http://superuser.com/a/573624
+			temp=$(mktemp -d) && unzip -d "$temp" ${build.cache.package} && mv "$temp"/*/* ../www/ && rmdir "$temp"/* "$temp"
+		-->
+		<condition property="command" value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; ${build.cache.package} &amp;&amp; mv &quot;$temp&quot;/*/* ../www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;">
+			<equals arg1="${typo3.cms.format}" arg2="zip" />
+		</condition>
+
+		<fail unless="command" message="The specified format (${typo3.cms.format}) is not supported!" />
+
+		<exec command="${command}" checkreturn="true" />
+
+		<echo>The TYPO3 CMS Package was successfully extracted.</echo>
+	</target>
+</project>

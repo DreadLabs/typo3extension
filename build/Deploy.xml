@@ -5,11 +5,11 @@
 
 	<import file="./CheckRequirements.xml" />
 	<import file="./ReplaceTokens.xml" />
-	<import file="./TYPO3CMS/Package/Downloader.xml" />
-	<import file="./TYPO3CMS/Package/Extractor.xml" />
+	<import file="./TYPO3CMS/Package/Download.xml" />
+	<import file="./TYPO3CMS/Package/Extract.xml" />
 	<import file="./TYPO3CMS/Package/LocalConfiguration.xml" />
 	<import file="./TYPO3CMS/Package/Configuration.xml" />
 
-	<target name="run" depends="checkrequirements.run, typo3cms_package_downloader.run, typo3cms_package_extractor.run, typo3cms_package_localconfiguration.run, typo3cms_package_configuration.run">
+	<target name="run" depends="checkrequirements.run, typo3cms_package_download.run, typo3cms_package_extract.run, typo3cms_package_localconfiguration.run, typo3cms_package_configuration.run">
 	</target>
 </project>
