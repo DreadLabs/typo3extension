@@ -26,6 +26,17 @@
 				<fail message="You must select a valid deployment target!" />
 			</then>
 			<else>
+				<!--
+					all deployment target properties are available namespaced:
+
+					Given Production.xml contains the property
+
+					db.name=my_db
+
+					Result
+
+					${target.db.name} available in project
+				-->
 				<property prefix="target" file="./Properties/Target/${deployTo}.properties" />
 			</else>
 		</if>
