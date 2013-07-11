@@ -1,0 +1,3 @@
+/build/**/Secret.properties
+/build/**/Targets/*
+!/build/**/Targets/NewTarget.properties

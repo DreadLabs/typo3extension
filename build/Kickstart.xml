@@ -61,6 +61,8 @@
 				<include name="Configuration/TypoScript/Static/setup.dist.txt" />
 			</fileset>
 		</delete>
+
+		<append destFile="../.gitignore" file="./Resources/Ignore.txt" />
 	</target>
 
 	<target name="run" depends="set-environment, get-extension-information, replace-tokens, cleanup">
