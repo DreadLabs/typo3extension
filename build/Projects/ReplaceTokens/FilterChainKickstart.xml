@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="replace-tokens-filterchain-kickstart">
+<project name="ReplaceTokens.FilterChainKickstart">
 	<filterchain id="replace-tokens-filterchain-kickstart">
 		<replacetokens begintoken="@@@" endtoken="@@@">
 			<token

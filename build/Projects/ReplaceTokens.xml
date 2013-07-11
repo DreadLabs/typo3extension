@@ -7,8 +7,8 @@
 			Filter chain importing is done here because maybe some InputTask defined
 			properties will be used.
 		-->
-		<import file="./ReplaceTokens/FilterChainDefault.xml" />
-		<import file="./ReplaceTokens/FilterChainKickstart.xml" />
+		<import file="./Projects/ReplaceTokens/FilterChainDefault.xml" />
+		<import file="./Projects/ReplaceTokens/FilterChainKickstart.xml" />
 
 		<echo msg="Preparing templates for ${environment}" />
 

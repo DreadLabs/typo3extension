@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Kickstart" default="run">
-	<property file="./Build.properties" />
-	<property file="./Secret.properties" />
+	<property file="./Properties/Build.properties" />
+	<property file="./Properties/Secret.properties" />
 
-	<import file="./ReplaceTokens.xml" />
+	<import file="./Projects/ReplaceTokens.xml" />
 
 	<target name="set-environment">
 		<property name="environment" value="dev" />
@@ -37,7 +37,7 @@
 		<input propertyname="extension.title">Title</input>
 		<input propertyname="extension.description">Description</input>
 
-		<loadfile property="kickstart.description.category" file="./Kickstart/Description/Category.txt" />
+		<loadfile property="kickstart.description.category" file="./Resources/Description/Kickstart/Category.txt" />
 		<echo>${kickstart.description.category}</echo>
 		<input propertyname="extension.category" validArgs="fe,plugin,be,module,services,example,misc,templates,doc">Category</input>
 
@@ -45,7 +45,7 @@
 		<input propertyname="extension.author.email">Author email</input>
 		<input propertyname="extension.dependencies" defaultValue="cms">CSV list of dependencies</input>
 
-		<loadfile property="kickstart.description.stage" file="./Kickstart/Description/Stage.txt" />
+		<loadfile property="kickstart.description.stage" file="./Resources/Description/Kickstart/Stage.txt" />
 		<echo>${kickstart.description.stage}</echo>
 		<input propertyname="extension.state" validArgs="alpha,beta,stable,experimental,test">State</input>
 
