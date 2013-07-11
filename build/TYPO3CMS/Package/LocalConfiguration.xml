@@ -37,11 +37,17 @@
 		<if>
 			<istrue value="${firstTimeLocalConfiguration}" />
 			<then>
-				<input propertyName="skipDeployment" validArgs="Y,N">This is the first time the LocalConfiguration.properties is generated. Skip deployment to do manual adjustments?</input>
+				<echo>This is the first time the LocalConfiguration.properties is generated.</echo>
+				<input propertyName="skipDeployment" validArgs="Y,N" defaultValue="Y">Skip deployment to do manual adjustments?</input>
 			</then>
 		</if>
 
-		<fail if="skipDeployment" message="Deployment skipped. Please adjust the LocalConfiguration.properties suiting your needs and re-run deployment." />
+		<if>
+			<equals arg1="${skipDeployment}" arg2="Y" />
+			<then>
+				<fail message="Deployment skipped. Please adjust the LocalConfiguration.properties suiting your needs and re-run deployment." />
+			</then>
+		</if>
 	</target>
 
 	<target name="merge-with-remote">
