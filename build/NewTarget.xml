@@ -6,11 +6,19 @@
 		<input propertyName="newtarget.targetName" message="Name of the new target" defaultValue="Remote" />
 
 		<input propertyName="newtarget.hostname" message="Hostname" />
+
 		<input propertyName="newtarget.protocol" message="Deployment protocol" defaultValue="scp" validArgs="scp,ftp" />
+
 		<input propertyName="newtarget.port" message="Port" defaultValue="22" />
+
 		<input propertyName="newtarget.username" message="(SSH) Username" />
 		<input propertyName="newtarget.password" message="(SSH) Password" />
+
 		<input propertyName="newtarget.path" message="Path" defaultValue="/var/www/vhosts/${newtarget.hostname}/htdocs" />
+
+		<input propertyName="newtarget.symlink.typo3_src" message="typo3_src symlink" defaultValue="typo3_src-x.y.z" />
+		<input propertyName="newtarget.symlink.index_php" message="Symlink index.php?" defaultValue="yes" validArgs="yes,no" />
+
 		<input propertyName="newtarget.db.host" message="DB host" defaultValue="127.0.0.1" />
 		<input propertyName="newtarget.db.name" message="DB Name" />
 		<input propertyName="newtarget.db.username" message="DB username" />
