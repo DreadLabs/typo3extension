@@ -16,7 +16,7 @@
 
 		<input propertyName="newtarget.path" message="Path" defaultValue="/var/www/vhosts/${newtarget.hostname}/htdocs" />
 
-		<input propertyName="newtarget.symlink.typo3_src" message="typo3_src symlink" defaultValue="typo3_src-x.y.z" />
+		<input propertyName="newtarget.symlink.typo3_src" message="typo3_src symlink" defaultValue="typo3_src-x.y.z/" />
 		<input propertyName="newtarget.symlink.index_php" message="Symlink index.php?" defaultValue="yes" validArgs="yes,no" />
 
 		<input propertyName="newtarget.db.host" message="DB host" defaultValue="127.0.0.1" />
