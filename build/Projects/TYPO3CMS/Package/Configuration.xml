@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Configuration">
 
+	<target name="set-environment">
+		<condition property="isBlank">
+			<and>
+				<equals arg1="${typo3.cms.flavor}" arg2="blank" />
+				<isset property="${target.symlink.typo3_src}" />
+				<or>
+					<equals arg1="${typo3.cms.format}" arg2="" />
+					<equals arg1="${typo3.cms.format}" arg2="tar" />
+				</or>
+			</and>
+		</condition>
+
+		<condition property="isDummy">
+			<and>
+				<equals arg1="${typo3.cms.flavor}" arg2="dummy" />
+				<isset property="${target.symlink.typo3_src}" />
+				<equals arg1="${typo3.cms.format}" arg2="zip" />
+			</and>
+		</condition>
+	</target>
+
 	<target name="install-tool">
 		<if>
 			<istrue value="${typo3.cms.enableInstallTool}" />
@@ -10,6 +31,26 @@
 		</if>
 	</target>
 
-	<target name="run" depends="install-tool">
+	<target name="handle-symlinks-blank" if="isBlank">
+		<delete file="../www/typo3_src" />
+		<symlink target="../www/typo3_src" link="${target.symlink.typo3_src}" />
+	</target>
+
+	<target name="handle-symlinks-dummy" if="isDummy">
+		<delete file="../www/typo3_src" />
+		<symlink target="../www/typo3_src" link="${target.symlink.typo3_src}" />
+	</target>
+
+	<target name="handle-symlinks" depends="handle-symlinks-blank, handle-symlinks-dummy">
+		<if>
+			<isfalse value="${target.symlink.index_php}" />
+			<then>
+				<delete file="../www/index.php" />
+				<copy file="../www/typo3_src/index.php" tofile="../www/index.php" />
+			</then>
+		</if>
+	</target>
+
+	<target name="run" depends="set-environment, install-tool, handle-symlinks">
 	</target>
 </project>
