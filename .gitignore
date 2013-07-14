@@ -3,3 +3,4 @@ composer.phar
 /.build-cache
 notes.txt
 /www
+README.html
