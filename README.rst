@@ -51,6 +51,8 @@ during the work with TYPO3 extensions.
 Deployment
 ''''''''''
 
+**Note**: Ensure the desired target in `build/Properties/Target[targetName].properties`:code: is properly configured.
+
 .. code:: sh
 
 	$ cd YourExtensionKey
