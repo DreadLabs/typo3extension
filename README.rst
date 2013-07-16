@@ -155,10 +155,6 @@ project.
 All target properties get prefixed by `target.`:code: during the deployment process.
 
 * **hostname** - *string* - Name (or IP address) of the target machine
-* **protocol** - *string* - Protocol to use during deployment
-
-  Valid values: `scp`:code:, `ftp`:code:
-
 * **port** - *integer* - Port number of the target machine
 
   *Used during deployment via scp/ssh*

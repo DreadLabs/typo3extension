@@ -47,17 +47,11 @@
 	</target>
 
 	<target name="check-php">
-		<if>
-			<equals arg1="${target.protocol}" arg2="scp" />
-			<then>
-				<available extension="ssh2" property="protocolExtensionAvailable" />
-			</then>
-			<else>
-				<property name="protocolExtensionAvailable" value="true" />
-			</else>
-		</if>
+		<condition property="ssh2extensionAvailable">
+			<available extension="ssh2" />
+		</condition>
 
-		<fail unless="protocolExtensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system! This extension is required for using the ${target.protocol} protocol." />
+		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
 	</target>
 
 	<target name="run" depends="os-info, check-downloader, check-archiver, check-coreutils, check-php">

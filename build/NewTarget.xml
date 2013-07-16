@@ -7,8 +7,6 @@
 
 		<input propertyName="newtarget.hostname" message="Hostname" />
 
-		<input propertyName="newtarget.protocol" message="Deployment protocol" defaultValue="scp" validArgs="scp,ftp" />
-
 		<input propertyName="newtarget.port" message="Port" defaultValue="22" />
 
 		<input propertyName="newtarget.username" message="(SSH) Username" />
