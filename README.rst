@@ -195,3 +195,20 @@ All target properties get prefixed by `target.`:code: during the deployment proc
 * **db.name** - *string* - Database name of the target
 * **db.username** - *string* - Database user name of the target
 * **db.password** - *string* - Database password of the target
+
+Assumptions
+-----------
+
+You've chosen this project package to create and deploy your TYPO3 CMS extension
+with the help of some best practices which emerged by some years of experience
+during the work with this fantastic PHP application.
+
+This project package is "opinionated software", which means it has very firm ideas
+about how things ought to be done, and tries to force those ideas on you. Some of
+the assumptions behind these opinions are:
+
+- You are using SSH to access the remote servers.
+- You're using `git`:code: to accomplish source code management tasks.
+- Deployment is only possible if you have committed your work and created an
+  appropriate tag. The latter is not required as a deployment also can be done
+  based upon a SHA1 commit object.

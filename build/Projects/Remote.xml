@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Remote">
+
+	<target name="working-copy-is-clean">
+		<exec command="git status --porcelain &amp;&amp; wc -l" dir="../" outputProperty="numberOfLines" checkreturn="true" />
+
+		<condition property="numberOfLinesIsZero">
+			<equals arg1="${numberOfLines}" arg2="0" />
+		</condition>
+
+		<fail unless="numberOfLinesIsZero" message="It seems you don't have a clean working copy! Please read the project's assumptions." />
+	</target>
+
+	<target name="create-releases-directory">
+		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}" />
+	</target>
+
+	<target name="get-current-release">
+		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" />
+
+		<if>
+			<not>
+				<isset property="release.id" />
+			</not>
+			<then>
+				<exec command="git log --pretty=format:%h -n 1" dir="../" outputProperty="release.id" />
+			</then>
+		</if>
+
+		<echo>Current release id is ${release.id}</echo>
+	</target>
+
+	<target name="create-new-release-directory" depends="create-releases-directory, get-current-release">
+		<ssh  host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+	</target>
+
+	<target name="upload-release" depends="create-new-release-directory">
+		<echo>Uploading files in progress, please be patient...</echo>
+
+		<scp host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" todir="${target.path}/${target.releases.dir}/${release.id}">
+			<fileset dir="../www">
+				<include name="**/**" />
+			</fileset>
+		</scp>
+	</target>
+
+	<target name="run" depends="working-copy-is-clean, upload-release">
+		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
+
+		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}">
+	</target>
+</project>
