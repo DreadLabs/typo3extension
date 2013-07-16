@@ -59,22 +59,7 @@
 
 	<target name="merge-with-remote" depends="generate">
 		<!-- download remote LocalConfiguration file -->
-		<if>
-			<and>
-				<equals arg1="${target.protocol}" arg2="ftp" />
-				<not>
-					<available file="${build.cache.dir}/LocalConfiguration.php" />
-				</not>
-			</and>
-			<then>
-				<echo>The remote LocalConfiguration.php can only be downloaded via `scp`.</echo>
-				<echo>Set the `protocol` property of target `${deployTo}` to `scp` or download the file manually into `${build.cache.dir}`.</echo>
-				<fail message="Cannot proceed with LocalConfiguration.php merging. Follow the instructions above and re-run deployment." />
-			</then>
-			<else>
-				<scp username="${target.username}" password="${target.password}" host="${target.hostname}" port="${target.port}" fetch="true" todir="${build.cache.dir}" file="${target.path}/typo3conf/LocalConfiguration.php" />
-			</else>
-		</if>
+		<scp username="${target.username}" password="${target.password}" host="${target.hostname}" port="${target.port}" fetch="true" todir="${build.cache.dir}" file="${target.path}/typo3conf/LocalConfiguration.php" />
 
 		<taskdef classname="Tasks.MergeLocalConfigurationTask" name="mergelocalconfiguration" />
 
