@@ -49,7 +49,7 @@
 
 	<target name="remote:extract-release" depends="remote:upload-release">
 		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
-	</taget>
+	</target>
 
 	<target name="remote:run" depends="remote:working-copy-is-clean, remote:extract-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
