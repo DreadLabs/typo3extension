@@ -65,7 +65,12 @@
 		<append destFile="../.gitignore" file="./Resources/Ignore.txt" />
 	</target>
 
-	<target name="run" depends="set-environment, get-extension-information, replace-tokens, cleanup">
+	<target name="init-scm">
+		<resolvepath propertyName="extension.dir" file="../" />
+		<gitinit repository="${extension.dir}" />
+	</target>
+
+	<target name="run" depends="set-environment, get-extension-information, replace-tokens, cleanup, init-scm">
 		<echo>Your extension was kickstarted with the following information:</echo>
 		<echo>Extension title: ${extension.title}</echo>
 		<echo>Extension description: ${extension.description}</echo>
