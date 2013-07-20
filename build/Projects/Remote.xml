@@ -40,11 +40,7 @@
 	<target name="remote:upload-release" depends="remote:compress">
 		<echo>Uploading files in progress, please be patient...</echo>
 
-		<scp host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" todir="${target.path}/${target.releases.dir}/${release.id}">
-			<fileset dir="${build.cache.dir}">
-				<include name="${release.id}.tar.gz" />
-			</fileset>
-		</scp>
+		<scp host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" todir="${target.path}/${target.releases.dir}/${release.id}" file="${build.cache.dir}${release.id}.tar.gz" />
 	</target>
 
 	<target name="remote:extract-release" depends="remote:upload-release">
