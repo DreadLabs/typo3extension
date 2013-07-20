@@ -19,9 +19,7 @@
 		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" error="/dev/null" />
 
 		<if>
-			<not>
-				<isset property="release.id" />
-			</not>
+			<equals arg1="${release.id}" arg2="" />
 			<then>
 				<exec command="git log --pretty=format:%h -n 1" dir="../" outputProperty="release.id" />
 			</then>
