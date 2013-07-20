@@ -46,6 +46,11 @@
 		<fail unless="rmdirAvailable" message="The `rmdir` command is not available on your system!" />
 	</target>
 
+	<target name="check-scm">
+		<exec command="which git" returnProperty="gitAvailable" />
+		<fail unless="gitAvailable" message="The `git` command is not available on your system!" />
+	</target>
+
 	<target name="check-php">
 		<condition property="ssh2extensionAvailable">
 			<available extension="ssh2" />
@@ -54,7 +59,7 @@
 		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
 	</target>
 
-	<target name="run" depends="os-info, check-downloader, check-archiver, check-coreutils, check-php">
+	<target name="run" depends="os-info, check-downloader, check-archiver, check-coreutils, check-scm, check-php">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
