@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ReplaceTokens" default="replacetokens.run">
+<project name="ReplaceTokens" default="replacetokens:run">
 
-	<target name="run">
+	<target name="replacetokens:run">
 
 		<!--
 			Filter chain importing is done here because maybe some InputTask defined
