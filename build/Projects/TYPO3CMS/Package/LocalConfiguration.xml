@@ -84,7 +84,7 @@
 			</then>
 		</if>
 	
-		<property name="command" value="${command}git add build/Properties/LocalConfiguration.properties &amp; &amp; " override="true" />
+		<property name="command" value="${command}git add build/Properties/LocalConfiguration.properties &amp;&amp; " override="true" />
 		<property name="command" value="${command}git commit --message='[TASK] updating LocalConfiguration.properties'" override="true" />
 
 		<exec command="${command}" dir="../" />
