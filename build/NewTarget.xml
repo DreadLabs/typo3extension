@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="NewTarget" default="run">
+<project name="NewTarget" default="newtarget:run">
 
-	<target name="get-input">
+	<target name="newtarget:get-input">
 		<!-- used in file name -->
 		<input propertyName="newtarget.targetName" message="Name of the new target" defaultValue="Remote" />
 
@@ -30,7 +30,7 @@
 		
 	</target>
 
-	<target name="run" depends="get-input">
+	<target name="newtarget:run" depends="newtarget:get-input">
 		<copy file="./Properties/Targets/NewTarget.properties" tofile="./Properties/Targets/${newtarget.targetName}.properties">
 			<filterchain>
 				<expandproperties />

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CheckRequirements">
 
-	<target name="os-info">
+	<target name="checkrequirements:os-info">
 		<echo>Operating system: ${os.name}</echo>
 	</target>
 
-	<target name="check-downloader">
+	<target name="checkrequirements:check-downloader">
 		<exec command="which ${typo3.cms.downloader}" returnProperty="downloaderAvailable" />
 		<fail unless="downloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
 	</target>
 
-	<target name="check-archiver">
+	<target name="checkrequirements:check-archiver">
 		<if>
 			<equals arg1="${typo3.cms.format}" arg2="" />
 			<then>
@@ -30,7 +30,7 @@
 		<fail unless="archiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
 	</target>
 
-	<target name="check-coreutils">
+	<target name="checkrequirements:check-coreutils">
 		<if>
 			<equals arg1="${selectedArchiver}" arg2="unzip" />
 			<then>
@@ -46,12 +46,12 @@
 		<fail unless="rmdirAvailable" message="The `rmdir` command is not available on your system!" />
 	</target>
 
-	<target name="check-scm">
+	<target name="checkrequirements:check-scm">
 		<exec command="which git" returnProperty="gitAvailable" />
 		<fail unless="gitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="check-php">
+	<target name="checkrequirements:check-php">
 		<condition property="ssh2extensionAvailable">
 			<available extension="ssh2" />
 		</condition>
@@ -59,7 +59,7 @@
 		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
 	</target>
 
-	<target name="run" depends="os-info, check-downloader, check-archiver, check-coreutils, check-scm, check-php">
+	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:check-downloader, checkrequirements:check-archiver, checkrequirements:check-coreutils, checkrequirements:check-scm, checkrequirements:check-php">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>

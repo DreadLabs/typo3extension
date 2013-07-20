@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Kickstart" default="run">
+<project name="Kickstart" default="kickstart:run">
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
 	<import file="./Projects/ReplaceTokens.xml" />
 
-	<target name="set-environment">
+	<target name="kickstart:set-environment">
 		<property name="environment" value="dev" />
 		<property name="replace-tokens.filterchain-id" value="replace-tokens-filterchain-kickstart" />
 		<!-- 17-01-2013 21:01 -->
@@ -14,7 +14,7 @@
 		</php>
 	</target>
 
-	<target name="kickstart-conditions-met">
+	<target name="kickstart:conditions-met">
 		<condition property="kickstart-templates-processed">
 			<and>
 				<available file="../src/ext_emconf.php" property="isExtensionManagerConfigurationExisting" />
@@ -29,7 +29,7 @@
 		<echo>OK</echo>
 	</target>
 
-	<target name="get-extension-information" depends="kickstart-conditions-met">
+	<target name="kickstart:get-extension-information" depends="kickstart:conditions-met">
 		<echo>Please tell me some basic information about your extension.</echo>
 
 		<input propertyname="extension.key" defaultValue="myext">Key</input>
@@ -52,7 +52,7 @@
 		<input propertyname="extension.version" defaultValue="1.0.0">Version</input>
 	</target>
 
-	<target name="cleanup">
+	<target name="kickstart:cleanup">
 		<delete>
 			<fileset dir="../src/">
 				<include name="ext_emconf.dist.php" />
@@ -65,12 +65,12 @@
 		<append destFile="../.gitignore" file="./Resources/Ignore.txt" />
 	</target>
 
-	<target name="init-scm">
+	<target name="kickstart:init-scm">
 		<resolvepath propertyName="extension.dir" file="../" />
 		<exec command="git init --quiet ${extension.dir}" />
 	</target>
 
-	<target name="run" depends="set-environment, get-extension-information, replace-tokens, cleanup, init-scm">
+	<target name="kickstart:run" depends="kickstart:set-environment, kickstart:get-extension-information, replacetokens:run, kickstart:cleanup, kickstart:init-scm">
 		<echo>Your extension was kickstarted with the following information:</echo>
 		<echo>Extension title: ${extension.title}</echo>
 		<echo>Extension description: ${extension.description}</echo>

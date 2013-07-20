@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Remote">
 
-	<target name="working-copy-is-clean">
+	<target name="remote:working-copy-is-clean">
 		<exec command="git status --porcelain | wc -l" dir="../" outputProperty="numberOfLines" checkreturn="true" />
 
 		<condition property="numberOfLinesIsZero">
@@ -11,11 +11,11 @@
 		<fail unless="numberOfLinesIsZero" message="It seems you don't have a clean working copy! Please read the project's assumptions." />
 	</target>
 
-	<target name="create-releases-directory">
+	<target name="remote:create-releases-directory">
 		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}" />
 	</target>
 
-	<target name="get-current-release">
+	<target name="remote:get-current-release">
 		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" />
 
 		<if>
@@ -30,11 +30,11 @@
 		<echo>Current release id is ${release.id}</echo>
 	</target>
 
-	<target name="create-new-release-directory" depends="create-releases-directory, get-current-release">
+	<target name="remote:create-new-release-directory" depends="remote:create-releases-directory, remote:get-current-release">
 		<ssh  host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
 	</target>
 
-	<target name="upload-release" depends="create-new-release-directory">
+	<target name="remote:upload-release" depends="remote:create-new-release-directory">
 		<echo>Uploading files in progress, please be patient...</echo>
 
 		<scp host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" todir="${target.path}/${target.releases.dir}/${release.id}">
@@ -44,7 +44,7 @@
 		</scp>
 	</target>
 
-	<target name="run" depends="working-copy-is-clean, upload-release">
+	<target name="remote:run" depends="remote:working-copy-is-clean, remote:upload-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
 		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />

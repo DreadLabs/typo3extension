@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Download">
 
-	<target name="build-url">
+	<target name="typo3cms:package:download:build-url">
 		<property name="typo3.cms.downloadUrl" value="http://get.typo3.org/" />
 
 		<if>
@@ -32,11 +32,11 @@
 		<echo>TYPO3 CMS download URL: ${typo3.cms.downloadUrl}</echo>
 	</target>
 
-	<target name="create-build-cache">
+	<target name="typo3cms:package:download:create-build-cache">
 		<mkdir dir="${build.cache.dir}" />
 	</target>
 
-	<target name="run" depends="build-url, create-build-cache">
+	<target name="typo3cms:package:download:run" depends="typo3cms:package:download:build-url, typo3cms:package:download:create-build-cache">
 		<condition property="command" value="wget ${typo3.cms.downloadUrl} -O ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>
