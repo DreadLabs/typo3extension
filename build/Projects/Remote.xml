@@ -47,6 +47,6 @@
 	<target name="run" depends="working-copy-is-clean, upload-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
-		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}">
+		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
 	</target>
 </project>
