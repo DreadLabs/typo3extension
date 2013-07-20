@@ -2,7 +2,7 @@
 <project name="Remote">
 
 	<target name="working-copy-is-clean">
-		<exec command="git status --porcelain &amp;&amp; wc -l" dir="../" outputProperty="numberOfLines" checkreturn="true" />
+		<exec command="git status --porcelain | wc -l" dir="../" outputProperty="numberOfLines" checkreturn="true" />
 
 		<condition property="numberOfLinesIsZero">
 			<equals arg1="${numberOfLines}" arg2="0" />
