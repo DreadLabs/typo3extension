@@ -67,7 +67,7 @@
 
 	<target name="init-scm">
 		<resolvepath propertyName="extension.dir" file="../" />
-		<gitinit repository="${extension.dir}" />
+		<exec command="git init --quiet ${extension.dir}" />
 	</target>
 
 	<target name="run" depends="set-environment, get-extension-information, replace-tokens, cleanup, init-scm">
