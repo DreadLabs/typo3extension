@@ -16,7 +16,7 @@
 	</target>
 
 	<target name="remote:get-current-release">
-		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" />
+		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" error="/dev/null" />
 
 		<if>
 			<not>
