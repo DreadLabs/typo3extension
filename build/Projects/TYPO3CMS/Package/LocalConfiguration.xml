@@ -90,7 +90,7 @@
 		<exec command="${command}" dir="../" />
 	</target>
 
-	<target name="run" depends="typo3cms_package_localconfiguration.create-from-default, typo3cms_package_localconfiguration.merge-with-remote, typo3cms_package_localconfiguraiton.cleanup">
+	<target name="run" depends="typo3cms_package_localconfiguration.create-from-default, typo3cms_package_localconfiguration.merge-with-remote, typo3cms_package_localconfiguration.cleanup">
 		<echo>LocalConfiguration.php was successfully generated &amp; updated.</echo>
 	</target>
 </project>
