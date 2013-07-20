@@ -72,10 +72,25 @@
 				<echo>${mergeWithRemoteStatus}</echo>
 			</catch>
 		</trycatch>
-		
 	</target>
 
-	<target name="run" depends="create-from-default, merge-with-remote">
-		<echo>LocalConfiguration.php was successfully generated.</echo>
+	<target name="cleanup">
+		<echo>Committing LocalConfiguration.properties update.</echo>
+
+		<if>
+			<istrue value="${firstTimeLocalConfiguration}" />
+			<then>
+				<property name="command" value="${command}git rm build/Properties/LocalConfiguration.dist.properties &amp;&amp; " override="true" />
+			</then>
+		</if>
+	
+		<property name="command" value="${command}git add build/Properties/LocalConfiguration.properties &amp; &amp; " override="true" />
+		<property name="command" value="${command}git commit --message='[TASK] updating LocalConfiguration.properties'" override="true" />
+
+		<exec command="${command}" dir="../" />
+	</target>
+
+	<target name="run" depends="create-from-default, merge-with-remote, cleanup">
+		<echo>LocalConfiguration.php was successfully generated &amp; updated.</echo>
 	</target>
 </project>
