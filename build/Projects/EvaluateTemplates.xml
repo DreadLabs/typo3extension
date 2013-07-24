@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ReplaceTokens" default="replacetokens:run">
+<project name="EvaluateTemplates" default="evaluate-templates:run">
 
-	<target name="replacetokens:run">
+	<target name="evaluate-templates:run">
 
 		<!--
-			Filter chain importing is done here because maybe some InputTask defined
+			Filter chain importing is done here because some InputTask defined
 			properties will be used.
 		-->
-		<import file="./Projects/ReplaceTokens/FilterChainDefault.xml" />
-		<import file="./Projects/ReplaceTokens/FilterChainKickstart.xml" />
+		<import file="./Projects/EvaluateTemplates/FilterChainDefault.xml" />
+		<import file="./Projects/EvaluateTemplates/FilterChainKickstart.xml" />
 
-		<echo msg="Preparing templates for ${environment}" />
+		<echo msg="Evaluating templates for ${environment}" />
 
 		<condition property="excludes" value="${excludes.default}">
 			<equals arg1="${environment}" arg2="prod" />
@@ -25,7 +25,7 @@
 
 			<fileset dir="../src/" excludes="${excludes}" />
 
-			<filterchain refid="${replace-tokens.filterchain-id}" />
+			<filterchain refid="evaluate-templates.filterchain.${evaluate-templates.filterchain-id}" />
 		</copy>
 	</target>
 </project>

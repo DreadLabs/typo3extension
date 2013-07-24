@@ -6,7 +6,7 @@
 
 	<import file="./Projects/SelectTarget.xml" />
 	<import file="./Projects/CheckRequirements.xml" />
-	<import file="./Projects/ReplaceTokens.xml" />
+	<import file="./Projects/EvaluateTemplates.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Download.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Extract.xml" />
 	<import file="./Projects/TYPO3CMS/Package/LocalConfiguration.xml" />

@@ -4,11 +4,11 @@
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
-	<import file="./Projects/ReplaceTokens.xml" />
+	<import file="./Projects/EvaluateTemplates.xml" />
 
 	<target name="kickstart:set-environment">
 		<property name="environment" value="dev" />
-		<property name="replace-tokens.filterchain-id" value="replace-tokens-filterchain-kickstart" />
+		<property name="evaluate-templates.filterchain-id" value="kickstart" />
 		<!-- 17-01-2013 21:01 -->
 		<php function="date" returnProperty="kickstart.timestamp">
 			<param value="d-m-Y H:i" />
@@ -71,7 +71,7 @@
 		<exec command="git init --quiet ${extension.dir}" />
 	</target>
 
-	<target name="kickstart:run" depends="kickstart:set-environment, kickstart:get-extension-information, replacetokens:run, kickstart:cleanup, kickstart:init-scm">
+	<target name="kickstart:run" depends="kickstart:set-environment, kickstart:get-extension-information, evaluate-templates:run, kickstart:cleanup, kickstart:init-scm">
 		<echo>Your extension was kickstarted with the following information:</echo>
 		<echo>Extension title: ${extension.title}</echo>
 		<echo>Extension description: ${extension.description}</echo>
