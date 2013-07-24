@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CheckRequirements">
 
-	<target name="checkrequirements:os-info">
+	<target name="check-requirements:os-info">
 		<echo>Operating system: ${os.name}</echo>
 	</target>
 
-	<target name="checkrequirements:downloader">
-		<exec command="which ${typo3.cms.downloader}" returnProperty="downloaderAvailable" />
-		<fail unless="downloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
+	<target name="check-requirements:downloader">
+		<exec command="which ${typo3.cms.downloader}" returnProperty="isDownloaderAvailable" />
+		<fail unless="isDownloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:archiver">
+	<target name="check-requirements:archiver">
 		<if>
 			<equals arg1="${typo3.cms.format}" arg2="" />
 			<then>
 				<property name="selectedArchiver" value="tar" />
-				<exec command="which tar" returnProperty="archiverAvailable" />
+				<exec command="which tar" returnProperty="isArchiverAvailable" />
 			</then>
 		</if>
 
@@ -23,57 +23,66 @@
 			<equals arg1="${typo3.cms.format}" arg2="zip" />
 			<then>
 				<property name="selectedArchiver" value="unzip" />
-				<exec command="which unzip" returnProperty="archiverAvailable" />
+				<exec command="which unzip" returnProperty="isArchiverAvailable" />
 			</then>
 		</if>
 
-		<fail unless="archiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
+		<fail unless="isArchiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:coreutils">
+	<target name="check-requirements:coreutils">
 		<if>
 			<equals arg1="${selectedArchiver}" arg2="unzip" />
 			<then>
-				<exec command="which mktemp" returnProperty="mktempAvailable" />
-				<fail unless="mktempAvailable" message="The `mktemp` command is not available on your system but is necessary for extracting the package format ${typo3.cms.format} with ${selectedArchiver}!" />
+				<exec command="which mktemp" returnProperty="isMktempAvailable" />
+				<fail unless="isMktempAvailable" message="The `mktemp` command is not available on your system but is necessary for extracting the package format ${typo3.cms.format} with ${selectedArchiver}!" />
 			</then>
 		</if>
 
-		<exec command="which mv" returnProperty="mvAvailable" />
-		<fail unless="mvAvailable" message="The `mv` command is not available on your system!" />
+		<exec command="which mv" returnProperty="isMvAvailable" />
+		<fail unless="isMvAvailable" message="The `mv` command is not available on your system!" />
 
-		<exec command="which rmdir" returnProperty="rmdirAvailable" />
-		<fail unless="rmdirAvailable" message="The `rmdir` command is not available on your system!" />
+		<exec command="which rmdir" returnProperty="isRmdirAvailable" />
+		<fail unless="isRmdirAvailable" message="The `rmdir` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:scm">
-		<exec command="which git" returnProperty="gitAvailable" />
-		<fail unless="gitAvailable" message="The `git` command is not available on your system!" />
+	<target name="check-requirements:scm">
+		<exec command="which git" returnProperty="isGitAvailable" />
+		<fail unless="isGitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:php">
-		<condition property="ssh2extensionAvailable">
-			<available extension="ssh2" />
-		</condition>
-
-		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
+	<target name="check-requirements:php">
+		<property name="ssh2Version" value="0.12" />
+		<property name="ssh2VersionComparison" value=">=" />
 
 		<taskdef classname="Tasks.ExtensionVersionAvailableTask" name="extensionversionavailable" />
+		<extensionversionavailable
+			extension="ssh2"
+			comparison="${ssh2VerionComparison}"
+			version="${ssh2Version}"
+			property="isCurrentSSH2" />
 
-		<extensionversionavailable property="isCurrentSSH2" extension="ssh2" version="0.12" comparison=">=" />
+		<exec command="which scp" returnProperty="isScpAvailable" />
 
 		<if>
-			<not>
-				<isset property="isCurrentSSH2" />
-			</not>
+			<and>
+				<not>
+					<isset property="isCurrentSSH2" />
+				</not>
+				<not>
+					<isset property="isScpAvailable" />
+				</not>
+			</and>
 			<then>
-				<exec command="which scp" returnProperty="scpAvailable" />
-				<fail unless="scpAvailable" message="The `scp` command is not available on your system, but is required as version of libssh2-php is too low!" />
+				<fail>
+					You either have to install the PHP extension `ssh2` ${ssh2VersionComparison} ${ssh2Version} (libssh2-php)
+					or install the ssh client package which includes the `scp` command!
+				</fail>
 			</then>
 		</if>
 	</target>
 
-	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:downloader, checkrequirements:archiver, checkrequirements:coreutils, checkrequirements:scm, checkrequirements:php">
+	<target name="check-requirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm, check-requirements:php">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
