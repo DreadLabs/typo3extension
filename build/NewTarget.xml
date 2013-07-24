@@ -12,6 +12,9 @@
 		<input propertyName="newtarget.username" message="(SSH) Username" />
 		<input propertyName="newtarget.password" message="(SSH) Password" />
 
+		<input propertyname="newtarget.key.public" message="Path to your public key" defaultValue="~/.ssh/id_rsa.pub" />
+		<input propertyname="newtarget.key.private" message="Path to your private key" defaultValue="~/.ssh/id_rsa" />
+
 		<input propertyName="newtarget.path" message="Path" defaultValue="/var/www/vhosts/${newtarget.hostname}/htdocs" />
 
 		<input propertyName="newtarget.symlink.typo3_src" message="typo3_src symlink" defaultValue="typo3_src-x.y.z/" />

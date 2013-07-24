@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Kickstart" default="kickstart:run">
+
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
