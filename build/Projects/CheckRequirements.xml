@@ -51,27 +51,7 @@
 		<fail unless="gitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:php">
-		<condition property="ssh2extensionAvailable">
-			<available extension="ssh2" />
-		</condition>
-
-		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
-
-		<extensionversionavailable property="isCurrentSSH2" extension="ssh2" version="0.12" comparison=">=" />
-
-		<if>
-			<not>
-				<isset property="isCurrentSSH2" />
-			</not>
-			<then>
-				<exec command="which scp" returnProperty="scpAvailable" />
-				<fail unless="scpAvailable" message="The `scp` command is not available on your system, but is required as version of libssh2-php is too low!" />
-			</then>
-		</if>
-	</target>
-
-	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:downloader, checkrequirements:archiver, checkrequirements:coreutils, checkrequirements:scm, checkrequirements:php">
+	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:downloader, checkrequirements:archiver, checkrequirements:coreutils, checkrequirements:scm">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
