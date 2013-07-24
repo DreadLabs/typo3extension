@@ -58,8 +58,6 @@
 
 		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
 
-		<taskdef classname="Tasks.ExtensionVersionAvailableTask" name="extensionversionavailable" />
-
 		<extensionversionavailable property="isCurrentSSH2" extension="ssh2" version="0.12" comparison=">=" />
 
 		<if>

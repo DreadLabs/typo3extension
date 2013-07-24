@@ -11,7 +11,7 @@
 		<if>
 			<isset property="isCurrentSSH2" />
 			<then>
-				<scp
+				<seclibscp
 					host="${target.hostname}"
 					port="${target.port}"
 					username="${target.username}"
@@ -28,7 +28,7 @@
 	</target>
 
 	<target name="remote:extract-release" depends="remote:setup:new-release-directory, remote:upload-release">
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
@@ -39,7 +39,7 @@
 	<target name="remote:run" depends="project:is-clean, remote:extract-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
