@@ -19,5 +19,5 @@
 
 	<taskdef
 		classname="Tasks.Seclib.SshTask"
-		name="seclibscp" />
+		name="seclibssh" />
 </project>
