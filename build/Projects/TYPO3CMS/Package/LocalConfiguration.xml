@@ -7,7 +7,9 @@
 				<available file="./Properties/LocalConfiguration.properties" />
 			</not>
 			<then>
-				<move file="./Properties/LocalConfiguration.dist.properties" tofile="./Properties/LocalConfiguration.properties" />
+				<move
+					file="./Properties/LocalConfiguration.dist.properties"
+					tofile="./Properties/LocalConfiguration.properties" />
 
 				<append destFile="./Properties/LocalConfiguration.properties">
 					<filterchain>
@@ -61,7 +63,14 @@
 		<!-- download remote LocalConfiguration file -->
 		<trycatch property="mergeWithRemoteStatus">
 			<try>
-				<scp username="${target.username}" password="${target.password}" host="${target.hostname}" port="${target.port}" fetch="true" todir="${build.cache.dir}" file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
+				<scp
+					username="${target.username}"
+					password="${target.password}"
+					host="${target.hostname}"
+					port="${target.port}"
+					fetch="true"
+					todir="${build.cache.dir}"
+					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
 
 				<taskdef classname="Tasks.MergeLocalConfigurationTask" name="mergelocalconfiguration" />
 

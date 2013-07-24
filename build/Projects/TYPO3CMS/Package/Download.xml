@@ -32,11 +32,7 @@
 		<echo>TYPO3 CMS download URL: ${typo3.cms.downloadUrl}</echo>
 	</target>
 
-	<target name="typo3cms:package:download:create-build-cache">
-		<mkdir dir="${build.cache.dir}" />
-	</target>
-
-	<target name="typo3cms:package:download:run" depends="typo3cms:package:download:build-url, typo3cms:package:download:create-build-cache">
+	<target name="typo3cms:package:download:run" depends="typo3cms:package:download:build-url, project:create-build-cache">
 		<condition property="command" value="wget ${typo3.cms.downloadUrl} -O ${build.cache.package}">
 			<equals arg1="${typo3.cms.downloader}" arg2="wget" />
 		</condition>

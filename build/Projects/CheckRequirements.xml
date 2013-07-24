@@ -52,6 +52,8 @@
 	</target>
 
 	<target name="check-requirements:php">
+		<available extension="ssh2" property="isSSH2Available" />
+
 		<property name="ssh2Version" value="0.12" />
 		<property name="ssh2VersionComparison" value=">=" />
 
@@ -63,6 +65,8 @@
 			property="isCurrentSSH2" />
 
 		<exec command="which scp" returnProperty="isScpAvailable" />
+
+		<fail unless="isSSH2Available" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
 
 		<if>
 			<and>

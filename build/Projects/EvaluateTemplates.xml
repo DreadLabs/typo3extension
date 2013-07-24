@@ -10,7 +10,7 @@
 		<import file="./Projects/EvaluateTemplates/FilterChainDefault.xml" />
 		<import file="./Projects/EvaluateTemplates/FilterChainKickstart.xml" />
 
-		<echo msg="Evaluating templates for ${environment}" />
+		<echo>Evaluating templates for ${environment}</echo>
 
 		<condition property="excludes" value="${excludes.default}">
 			<equals arg1="${environment}" arg2="prod" />

@@ -41,4 +41,17 @@
 			command="tar czf ${build.cache.dir}${release.id}.tar.gz ./"
 			dir="../www" />
 	</target>
+
+	<target name="project:create-build-cache">
+		<mkdir dir="${build.cache.dir}" />
+	</target>
+
+	<target name="project:cleanup">
+		<delete includeemptydirs="true">
+			<fileset dir="../www">
+				<include name="**/**" />
+				<exclude name=".gitkeep" />
+			</fileset>
+		</delete>
+	</target>
 </project>

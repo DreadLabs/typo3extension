@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Extract">
 
-	<target name="typo3cms:package:extract:cleanup">
-		<delete includeemptydirs="true">
-			<fileset dir="../www">
-				<include name="**/**" />
-				<exclude name=".gitkeep" />
-			</fileset>
-		</delete>
-	</target>
-
-	<target name="typo3cms:package:extract:run" depends="typo3cms:package:extract:cleanup">
+	<target name="typo3cms:package:extract:run" depends="project:cleanup">
 		<condition property="command" value="tar xzf ${build.cache.package} --strip-components=1 --directory ../www/">
 			<or>
 				<equals arg1="${typo3.cms.format}" arg2="" />

@@ -15,7 +15,7 @@
 	<import file="./Projects/Remote/Setup.xml" />
 	<import file="./Projects/Remote.xml" />
 
-	<target name="deploy:requirements" depends="selecttarget:run, check-requirements:run">
+	<target name="deploy:requirements" depends="select-target:run, check-requirements:run">
 	</target>
 
 	<target name="deploy:typo3cms" depends="typo3cms:package:download:run, typo3cms:package:extract:run">

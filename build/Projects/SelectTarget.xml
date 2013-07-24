@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="SelectTarget">
 
-	<target name="selecttarget:run">
+	<target name="select-target:run">
 		<fail unless="deployTo" message="You must specify a deployment target! Re-run Deploy.xml with -DdeployTo=[target] set!" />
 
 		<if>
@@ -37,7 +37,7 @@
 
 					Result
 
-					${target.db.name} available in project
+					${target.db.name} with value `my_db` available in project
 				-->
 				<property prefix="target" file="./Properties/Targets/${deployTo}.properties" />
 			</else>
