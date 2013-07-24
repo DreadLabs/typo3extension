@@ -11,8 +11,19 @@
 	<import file="./Projects/TYPO3CMS/Package/Extract.xml" />
 	<import file="./Projects/TYPO3CMS/Package/LocalConfiguration.xml" />
 	<import file="./Projects/TYPO3CMS/Package/Configuration.xml" />
+	<import file="./Projects/Project.xml" />
+	<import file="./Projects/Remote/Setup.xml" />
 	<import file="./Projects/Remote.xml" />
 
-	<target name="deploy:run" depends="selecttarget:run,checkrequirements:run,typo3cms:package:download:run, typo3cms:package:extract:run, typo3cms:package:localconfiguration:run, typo3cms:package:configuration:run, remote:run">
+	<target name="deploy:requirements" depends="selecttarget:run, checkrequirements:run">
+	</target>
+
+	<target name="deploy:typo3cms" depends="typo3cms:package:download.run, typo3cms:package:extract.run">
+	</target>
+
+	<target name="deploy:configure" depends="typo3cms:package:localconfiguration.run, typo3cms:package:configuration.run">
+	</target>
+
+	<target name="deploy:run" depends="deploy:requirements, deploy:typo3cms, deploy:configure, remote:run">
 	</target>
 </project>

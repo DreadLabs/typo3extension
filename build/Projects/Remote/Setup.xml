@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Remote.Setup">
+
+	<target name="remote:setup:releases-directory">
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="mkdir -p ${target.path}/${target.releases.dir}" />
+	</target>
+
+	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id">
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+	</target>
+</project>

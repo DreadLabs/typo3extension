@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Project">
+
+	<target name="project:is-clean">
+		<exec
+			command="git status --porcelain | wc -l"
+			dir="../" outputProperty="numberOfLines" checkreturn="true" />
+
+		<condition property="numberOfLinesIsZero">
+			<equals arg1="${numberOfLines}" arg2="0" />
+		</condition>
+
+		<fail
+			unless="numberOfLinesIsZero"
+			message="It seems you don't have a clean working copy! Please read the project's assumptions." />
+	</target>
+
+	<target name="project:get-release-id">
+		<exec
+			command="git describe --abbrev=0"
+			dir="../"
+			outputProperty="release.id"
+			error="/dev/null" />
+
+		<if>
+			<equals arg1="${release.id}" arg2="" />
+			<then>
+				<exec
+					command="git log --pretty=format:%h -n 1"
+					dir="../"
+					outputProperty="release.id" />
+			</then>
+		</if>
+
+		<echo>Current release id is ${release.id}</echo>
+	</target>
+
+	<target name="project:compress">
+		<echo>Compressing intermediate deployment directory...</echo>
+		<exec
+			command="tar czf ${build.cache.dir}${release.id}.tar.gz ./"
+			dir="../www" />
+	</target>
+</project>

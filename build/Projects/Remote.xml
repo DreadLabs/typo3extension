@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Remote">
 
-	<target name="remote:working-copy-is-clean">
-		<exec command="git status --porcelain | wc -l" dir="../" outputProperty="numberOfLines" checkreturn="true" />
-
-		<condition property="numberOfLinesIsZero">
-			<equals arg1="${numberOfLines}" arg2="0" />
-		</condition>
-
-		<fail unless="numberOfLinesIsZero" message="It seems you don't have a clean working copy! Please read the project's assumptions." />
-	</target>
-
-	<target name="remote:create-releases-directory">
-		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}" />
-	</target>
-
-	<target name="remote:get-current-release">
-		<exec command="git describe --abbrev=0" dir="../" outputProperty="release.id" error="/dev/null" />
-
-		<if>
-			<equals arg1="${release.id}" arg2="" />
-			<then>
-				<exec command="git log --pretty=format:%h -n 1" dir="../" outputProperty="release.id" />
-			</then>
-		</if>
-
-		<echo>Current release id is ${release.id}</echo>
-	</target>
-
-	<target name="remote:create-new-release-directory" depends="remote:create-releases-directory, remote:get-current-release">
-		<ssh  host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
-	</target>
-
-	<target name="remote:compress" depends="remote:create-new-release-directory">
-		<echo>Compressing intermediate deployment directory...</echo>
-		<exec command="tar czf ${build.cache.dir}${release.id}.tar.gz ./" dir="../www" />
-	</target>
-
-	<target name="remote:upload-release" depends="remote:compress">
+	<target name="remote:upload-release" depends="project:compress">
 		<echo>Uploading files in progress, please be patient...</echo>
 
-		<resolvepath propertyName="release.package" file="${build.cache.dir}${release.id}.tar.gz" />
+		<resolvepath
+			propertyName="release.package"
+			file="${build.cache.dir}${release.id}.tar.gz" />
 
-		<scp host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" todir="${target.path}/${target.releases.dir}/${release.id}/" file="${release.package}" />
+		<if>
+			<isset property="isCurrentSSH2" />
+			<then>
+				<scp
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					todir="${target.path}/${target.releases.dir}/${release.id}/"
+					file="${release.package}" />
+			</then>
+			<else>
+				<exec
+					command="scp -i ${target.key.public} -P ${target.port} ${release.package} ${target.username}@${target.hostname}:${target.path}/${target.releases.dir}/${release.id}"
+					dir="../" />
+			</else>
+		</if>
 	</target>
 
-	<target name="remote:extract-release" depends="remote:upload-release">
-		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
+	<target name="remote:extract-release" depends="remote:setup:new-release-directory, remote:upload-release">
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
 	</target>
 
-	<target name="remote:run" depends="remote:working-copy-is-clean, remote:extract-release">
+	<target name="remote:run" depends="project:is-clean, remote:extract-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
-		<ssh host="${target.hostname}" port="${target.port}" username="${target.username}" password="${target.password}" command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
 	</target>
 </project>
