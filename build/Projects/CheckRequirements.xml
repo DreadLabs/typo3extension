@@ -5,12 +5,12 @@
 		<echo>Operating system: ${os.name}</echo>
 	</target>
 
-	<target name="checkrequirements:check-downloader">
+	<target name="checkrequirements:downloader">
 		<exec command="which ${typo3.cms.downloader}" returnProperty="downloaderAvailable" />
 		<fail unless="downloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:check-archiver">
+	<target name="checkrequirements:archiver">
 		<if>
 			<equals arg1="${typo3.cms.format}" arg2="" />
 			<then>
@@ -30,7 +30,7 @@
 		<fail unless="archiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:check-coreutils">
+	<target name="checkrequirements:coreutils">
 		<if>
 			<equals arg1="${selectedArchiver}" arg2="unzip" />
 			<then>
@@ -46,20 +46,34 @@
 		<fail unless="rmdirAvailable" message="The `rmdir` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:check-scm">
+	<target name="checkrequirements:scm">
 		<exec command="which git" returnProperty="gitAvailable" />
 		<fail unless="gitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:check-php">
+	<target name="checkrequirements:php">
 		<condition property="ssh2extensionAvailable">
 			<available extension="ssh2" />
 		</condition>
 
 		<fail unless="ssh2extensionAvailable" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
+
+		<taskdef classname="Tasks.ExtensionVersionAvailableTask" name="extensionversionavailable" />
+
+		<extensionversionavailable property="isCurrentSSH2" extension="ssh2" version="0.12" comparison=">=" />
+
+		<if>
+			<not>
+				<isset property="isCurrentSSH2" />
+			</not>
+			<then>
+				<exec command="which scp" returnProperty="scpAvailable" />
+				<fail unless="scpAvailable" message="The `scp` command is not available on your system, but is required as version of libssh2-php is too low!" />
+			</then>
+		</if>
 	</target>
 
-	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:check-downloader, checkrequirements:check-archiver, checkrequirements:check-coreutils, checkrequirements:check-scm, checkrequirements:check-php">
+	<target name="checkrequirements:run" depends="checkrequirements:os-info, checkrequirements:downloader, checkrequirements:archiver, checkrequirements:coreutils, checkrequirements:scm, checkrequirements:php">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
