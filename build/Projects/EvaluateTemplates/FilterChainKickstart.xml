@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="EvaluateTemplates.FilterChainKickstart">
 
-	<filterchain id="evalulate-templates.filterchain.kickstart">
+	<filterchain id="evaluate-templates.filterchain.kickstart">
 		<replacetokens begintoken="@@@" endtoken="@@@">
 			<token
 				key="GENERATION_DATETIMESTAMP"

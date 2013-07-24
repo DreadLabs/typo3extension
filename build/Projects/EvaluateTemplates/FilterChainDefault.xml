@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="EvaluateTemplates.FilterChainDefault">
 
-	<filterchain id="evalulate-templates.filterchain.default">
+	<filterchain id="evaluate-templates.filterchain.default">
 		<replacetokens begintoken="@@@" endtoken="@@@">
 			<token
 				key="DOMAIN"
