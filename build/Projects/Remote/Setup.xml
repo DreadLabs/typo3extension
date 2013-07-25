@@ -2,7 +2,7 @@
 <project name="Remote.Setup">
 
 	<target name="remote:setup:releases-directory">
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
@@ -11,7 +11,7 @@
 	</target>
 
 	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id">
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"

@@ -4,6 +4,7 @@
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
+	<import file="./Projects/TaskDefinitions.xml" />
 	<import file="./Projects/SelectTarget.xml" />
 	<import file="./Projects/CheckRequirements.xml" />
 	<import file="./Projects/EvaluateTemplates.xml" />

@@ -51,42 +51,7 @@
 		<fail unless="isGitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="check-requirements:php">
-		<available extension="ssh2" property="isSSH2Available" />
-
-		<property name="ssh2Version" value="0.12" />
-		<property name="ssh2VersionComparison" value=">=" />
-
-		<taskdef classname="Tasks.ExtensionVersionAvailableTask" name="extensionversionavailable" />
-		<extensionversionavailable
-			extension="ssh2"
-			comparison="${ssh2VerionComparison}"
-			version="${ssh2Version}"
-			property="isCurrentSSH2" />
-
-		<exec command="which scp" returnProperty="isScpAvailable" />
-
-		<fail unless="isSSH2Available" message="The PHP extension `ssh2` (libssh2-php) is not available on your system!" />
-
-		<if>
-			<and>
-				<not>
-					<isset property="isCurrentSSH2" />
-				</not>
-				<not>
-					<isset property="isScpAvailable" />
-				</not>
-			</and>
-			<then>
-				<fail>
-					You either have to install the PHP extension `ssh2` ${ssh2VersionComparison} ${ssh2Version} (libssh2-php)
-					or install the ssh client package which includes the `scp` command!
-				</fail>
-			</then>
-		</if>
-	</target>
-
-	<target name="check-requirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm, check-requirements:php">
+	<target name="checkrequirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>

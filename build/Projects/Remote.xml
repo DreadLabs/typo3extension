@@ -8,27 +8,17 @@
 			propertyName="release.package"
 			file="${build.cache.dir}${release.id}.tar.gz" />
 
-		<if>
-			<isset property="isCurrentSSH2" />
-			<then>
-				<scp
-					host="${target.hostname}"
-					port="${target.port}"
-					username="${target.username}"
-					password="${target.password}"
-					todir="${target.path}/${target.releases.dir}/${release.id}/"
-					file="${release.package}" />
-			</then>
-			<else>
-				<exec
-					command="scp -i ${target.key.public} -P ${target.port} ${release.package} ${target.username}@${target.hostname}:${target.path}/${target.releases.dir}/${release.id}"
-					dir="../" />
-			</else>
-		</if>
+		<seclibscp
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			todir="${target.path}/${target.releases.dir}/${release.id}/"
+			file="${release.package}" />
 	</target>
 
 	<target name="remote:extract-release" depends="remote:setup:new-release-directory, remote:upload-release">
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
@@ -39,7 +29,7 @@
 	<target name="remote:run" depends="project:is-clean, remote:extract-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
-		<ssh
+		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"

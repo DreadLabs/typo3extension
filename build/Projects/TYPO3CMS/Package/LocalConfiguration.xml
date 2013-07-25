@@ -54,16 +54,16 @@
 	</target>
 
 	<target name="typo3cms:package:localconfiguration:generate">
-		<taskdef classname="Tasks.GenerateLocalConfigurationTask" name="generatelocalconfiguration" />
-
-		<generatelocalconfiguration file="../www/typo3conf/LocalConfiguration.php" propertyprefix="LocalConfiguration" />
+		<generatelocalconfiguration
+			file="../www/typo3conf/LocalConfiguration.php"
+			propertyprefix="LocalConfiguration" />
 	</target>
 
 	<target name="typo3cms:package:localconfiguration:merge-with-remote" depends="typo3cms:package:localconfiguration:generate">
 		<!-- download remote LocalConfiguration file -->
 		<trycatch property="mergeWithRemoteStatus">
 			<try>
-				<scp
+				<seclibscp
 					username="${target.username}"
 					password="${target.password}"
 					host="${target.hostname}"
@@ -72,9 +72,9 @@
 					todir="${build.cache.dir}"
 					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
 
-				<taskdef classname="Tasks.MergeLocalConfigurationTask" name="mergelocalconfiguration" />
-
-				<mergelocalconfiguration localfile="../www/typo3conf/LocalConfiguration.php" remotefile="${build.cache.dir}/LocalConfiguration.php" />
+				<mergelocalconfiguration
+					localfile="../www/typo3conf/LocalConfiguration.php"
+					remotefile="${build.cache.dir}/LocalConfiguration.php" />
 			</try>
 			<catch>
 				<echo>Merging remote LocalConfiguration.php failed because of the following reason:</echo>
