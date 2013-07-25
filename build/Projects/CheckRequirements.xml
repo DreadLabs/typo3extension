@@ -51,7 +51,7 @@
 		<fail unless="isGitAvailable" message="The `git` command is not available on your system!" />
 	</target>
 
-	<target name="checkrequirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm">
+	<target name="check-requirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
