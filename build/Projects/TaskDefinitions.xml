@@ -24,4 +24,8 @@
 	<taskdef
 		classname="Tasks.Seclib.Seclib_SftpTask"
 		name="seclibsftp" />
+
+	<taskdef
+		classname="Tasks.Ssh2.Ssh2_SftpTask"
+		name="sftp" />
 </project>

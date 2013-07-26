@@ -8,7 +8,7 @@
 			propertyName="release.package"
 			file="${build.cache.dir}${release.id}.tar.gz" />
 
-		<seclibsftp
+		<sftp
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
@@ -18,7 +18,7 @@
 	</target>
 
 	<target name="remote:extract-release" depends="remote:setup:new-release-directory, remote:upload-release">
-		<seclibssh
+		<ssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
@@ -29,7 +29,7 @@
 	<target name="remote:run" depends="project:is-clean, remote:extract-release">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 
-		<seclibssh
+		<ssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
