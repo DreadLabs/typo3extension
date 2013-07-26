@@ -20,4 +20,8 @@
 	<taskdef
 		classname="Tasks.Seclib.Seclib_SshTask"
 		name="seclibssh" />
+
+	<taskdef
+		classname="Tasks.Seclib.Seclib_SftpTask"
+		name="seclibsftp" />
 </project>

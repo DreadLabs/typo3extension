@@ -8,7 +8,7 @@
 			propertyName="release.package"
 			file="${build.cache.dir}${release.id}.tar.gz" />
 
-		<seclibscp
+		<seclibsftp
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
