@@ -10,7 +10,8 @@
 	],
 	"require": {
 		"phing/phing": "2.5.*",
-		"dreadlabs/typo3-cms-phing-helper": "3.1.*"
+		"dreadlabs/typo3-cms-phing-helper": "3.1.*",
+		"dreadlabs/phing-ssh-ext": "dev-master"
 	},
 	"repositories": [
 		{
