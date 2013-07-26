@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Remote.Setup">
 
-	<target name="remote:setup:releases-directory">
+	<target name="remote:setup:releases-directory:seclib" unless="isCurrentSSH2">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
@@ -10,12 +10,38 @@
 			command="mkdir -p ${target.path}/${target.releases.dir}" />
 	</target>
 
-	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id">
+	<target name="remote:setup:releases-directory:ssh2" if="isCurrentSSH2">
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="mkdir -p ${target.path}/${target.releases.dir}" />
+	</target>
+
+	<target name="remote:setup:releases-directory" depends="remote:setup:releases-directory:seclib, remote:setup:releases-directory:ssh2">
+		<echo>Successfully created releases directory ${target.path}/${target.releases.dir}</echo>
+	</target>
+
+	<target name="remote:setup:new-release-directory:seclib" unless="isCurrentSSH2">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
 			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+	</target>
+
+	<target name="remote:setup:new-releas-directory:ssh2" if="isCurrentSSH2">
+		<ssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+	</target>
+
+	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id, remote:setup:new-release-directory-seclib, remote:setup:new-release-directory:ssh2">
+		<echo>Successfully created new release directory ${target.path}/${ŧarget.releases.dir}/${release.id}</echo>
 	</target>
 </project>
