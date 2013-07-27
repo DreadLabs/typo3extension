@@ -41,7 +41,7 @@
 			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
 	</target>
 
-	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id, remote:setup:new-release-directory-seclib, remote:setup:new-release-directory:ssh2">
+	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id, remote:setup:new-release-directory:seclib, remote:setup:new-release-directory:ssh2">
 		<echo>Successfully created new release directory ${target.path}/${ŧarget.releases.dir}/${release.id}</echo>
 	</target>
 </project>
