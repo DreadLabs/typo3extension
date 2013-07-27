@@ -52,7 +52,7 @@
 	</target>
 
 	<target name="check-requirements:php">
-		<extensionavailable
+		<extensionversionavailable
 			extension="ssh2"
 			comparison=">="
 			version="0.12"
