@@ -32,7 +32,7 @@
 			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
 	</target>
 
-	<target name="remote:setup:new-releas-directory:ssh2" if="isCurrentSSH2">
+	<target name="remote:setup:new-release-directory:ssh2" if="isCurrentSSH2">
 		<ssh
 			host="${target.hostname}"
 			port="${target.port}"
