@@ -55,7 +55,7 @@
 		<echo>Successfully extracted release</echo>
 	</target>
 
-	<target name="remote:switch-symlink-prepare">
+	<target name="remote:switch-symlink:prepare">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 	</target>
 
