@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Remote.Release.Upload">
+
+	<target name="remote:release:upload:prepare" depends="project:compress, remote:setup:new-release-directory">
+		<echo>Uploading files in progress, please be patient...</echo>
+
+		<resolvepath
+			propertyName="release.package"
+			file="${build.cache.dir}${release.id}.tar.gz" />
+	</target>
+
+	<target name="remote:release:upload:seclib" unless="isCurrentSSH2">
+		<seclibsftp
+				host="${target.hostname}"
+				port="${target.port}"
+				username="${target.username}"
+				password="${target.password}"
+				todir="${target.path}/${target.releases.dir}/${release.id}/"
+				file="${release.package}" />
+	</target>
+
+	<target name="remote:release:upload:ssh2" if="isCurrentSSH2">
+		<sftp
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			todir="${target.path}/${target.releases.dir}/${release.id}/"
+			file="${release.package}" />
+	</target>
+
+	<target name="remote:release:upload:run" depends="remote:release:upload:prepare, remote:release:upload:seclib, remote:release:upload:ssh2">
+		<echo>Successfully uploaded release ${release.id} to ${target.path}/${target.releases.dir}/${release.id}/</echo>
+	</target>
+</project>
