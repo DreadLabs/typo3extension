@@ -59,10 +59,10 @@
 
 	<target name="typo3cms:package:extract:run" depends="project:cleanup, typo3cms:package:extract:prepare, typo3cms:package:extract:tar, typo3cms:package:extract:zip">
 		<move todir="../www">
+			<!-- strips first part of file/path name -->
+			<mapper type="regexp" from="^(.*)\/(.*)" to="\2" />
 			<fileset dir="${package.extraction.dir}">
 				<include name="**/**" />
-				<!-- strips first part of file/path name -->
-				<mapper type="regexp" from="^(.*)\/(.*)" to="\2" />
 			</fileset>
 		</move>
 
