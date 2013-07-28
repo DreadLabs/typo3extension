@@ -66,7 +66,17 @@
 			<!--
 			<mapper classname="Mappers.CutDirsMapper" from="1" />
 			-->
-			<mapper type="regexp" from="^(.*)?${package.extraction.dir}/(.[^/]*)/(.*)" to="\3" />
+			<!--
+				starting point of file name is ${package.extraction.dir}
+
+				Example
+
+				Given ${package.extraction.dir} is /tmp/t3e123456
+
+				Result
+				String passed to $from pattern is "blankpackage-6.0.7/typo3conf/LocalConfiguration.php"
+			-->
+			<mapper type="regexp" from="^(.[^/]*)/(.*)" to="\2" />
 		</move>
 
 		<delete dir="${package.extraction.dir}" />
