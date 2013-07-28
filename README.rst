@@ -37,7 +37,13 @@ How to use
    	$ cd YourExtensionKey
    	$ vendor/bin/phing -f build/Kickstart.xml
 
-4. Start coding!
+4. Initial commit
+
+   .. code:: sh
+
+   	$ git add . && git commit -m '[INIT] initial commit'
+
+5. Start coding!
 
 Features
 --------
@@ -76,10 +82,12 @@ Requirements
 ------------
 
 Currently this project requires a \*nix machine as it makes usage of some low
-level commands like `wget`:code:, `curl`:code:, `tar`:code: (or `unzip`:code:), `mktemp`:code:, `mv`:code: & `rmdir`:code:.
+level commands like `wget`:code:, `curl`:code:.
 
-Furthermore, you must install the PHP ssh2 extension (`libssh2-php`:code:) in order
-to use the Phing `ScpTask`:code:.
+I suggest you to install the PHP ssh2 extension (`libssh2-php`:code:) in order
+to make use of the PHP implementation for ssh/scp/sftp commands. If you can't
+install this PECL extension, this package falls back to `phpseclib/phpseclib`:code:
+package.
 
 Configuration
 -------------

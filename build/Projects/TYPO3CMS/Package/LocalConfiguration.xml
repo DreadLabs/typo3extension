@@ -53,7 +53,7 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:generate">
+	<target name="typo3cms:package:localconfiguration:generate" depends="typo3cms:package:localconfiguration:create-from-default">
 		<generatelocalconfiguration
 			file="../www/typo3conf/LocalConfiguration.php"
 			propertyprefix="LocalConfiguration" />
@@ -83,7 +83,7 @@
 		</trycatch>
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:cleanup">
+	<target name="typo3cms:package:localconfiguration:cleanup" depends="typo3cms:package:localconfiguration:merge-with-remote">
 		<echo>Committing LocalConfiguration.properties update.</echo>
 
 		<if>
@@ -99,7 +99,7 @@
 		<exec command="${command}" dir="../" />
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:run" depends="typo3cms:package:localconfiguration:create-from-default, typo3cms:package:localconfiguration:merge-with-remote, typo3cms:package:localconfiguration:cleanup">
+	<target name="typo3cms:package:localconfiguration:run" depends="typo3cms:package:localconfiguration:cleanup">
 		<echo>LocalConfiguration.php was successfully generated &amp; updated.</echo>
 	</target>
 </project>

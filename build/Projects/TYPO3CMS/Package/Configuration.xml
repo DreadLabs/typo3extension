@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Configuration">
 
-	<target name="typo3cms:package:configuration:set-environment">
+	<target name="typo3cms:package:configuration:prepare">
 		<condition property="isBlank">
 			<and>
 				<equals arg1="${typo3.cms.flavor}" arg2="blank" />
@@ -51,6 +51,6 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:configuration:run" depends="typo3cms:package:configuration:set-environment, typo3cms:package:configuration:install-tool, typo3cms:package:configuration:handle-symlinks">
+	<target name="typo3cms:package:configuration:run" depends="typo3cms:package:configuration:prepare, typo3cms:package:configuration:install-tool, typo3cms:package:configuration:handle-symlinks">
 	</target>
 </project>
