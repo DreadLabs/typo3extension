@@ -62,7 +62,8 @@
 			<fileset dir="${package.extraction.dir}">
 				<include name="**/**" />
 			</fileset>
-			<mapper type="cutdirs" dirs="1" />
+			<!-- from is set to "dirs" internally -->
+			<mapper classname="Mappers.CutDirsMapper" from="1" />
 		</move>
 
 		<delete dir="${package.extraction.dir}" />
