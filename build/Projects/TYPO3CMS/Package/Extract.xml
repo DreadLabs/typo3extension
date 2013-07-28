@@ -1,25 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TYPO3CMS.Package.Extract">
 
-	<target name="typo3cms:package:extract:run" depends="project:cleanup">
-		<condition property="command" value="tar xzf ${build.cache.package} --strip-components=1 --directory ../www/">
+	<target name="typo3cms:package:extract:prepare">
+		<mktempdir prefix="t3e" property="package.extraction.dir" />
+		<echo>Successfully created temporary extraction directory: ${package.extraction.dir}</echo>
+
+		<condition property="isTarArchive">
 			<or>
 				<equals arg1="${typo3.cms.format}" arg2="" />
 				<equals arg1="${typo3.cms.format}" arg2="tar" />
 			</or>
 		</condition>
 
+		<condition property="isZipArchive">
+			<equals arg1="${typo3.cms.format}" arg2="zip" />
+		</condition>
+
+		<if>
+			<not>
+				<or>
+					<isset property="isTarArchive" />
+					<isset property="isZipArchive" />
+				</or>
+			</not>
+			<then>
+				<fail message="The specified format (${typo3.cms.format}) is not supported!" />
+			</then>
+		</if>
+	</target>
+
+	<target name="typo3cms:package:extract:tar" if="isTarArchive">
+		<!--
+		<property
+			name="command"
+			value="tar xzf ${build.cache.package} - -strip-components=1 - -directory ../www/" />
+
+		<exec command="${command}" checkreturn="true" />
+		-->
+
+		<untar file="${build.cache.package}" todir="${package.extraction.dir}" />
+	</target>
+
+	<target name="typo3cms:package:extract:zip" if="isZipArchive">
 		<!--
 			@see http://superuser.com/a/573624
 			temp=$(mktemp -d) && unzip -d "$temp" ${build.cache.package} && mv "$temp"/*/* ../www/ && rmdir "$temp"/* "$temp"
 		-->
-		<condition property="command" value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; ${build.cache.package} &amp;&amp; mv &quot;$temp&quot;/*/* ../www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;">
-			<equals arg1="${typo3.cms.format}" arg2="zip" />
-		</condition>
-
-		<fail unless="command" message="The specified format (${typo3.cms.format}) is not supported!" />
+		<!--
+		<property
+			name="command"
+			value="temp=$(mktemp -d) &amp;&amp; unzip -d &quot;$temp&quot; ${build.cache.package} &amp;&amp; mv &quot;$temp&quot;/*/* ../www/ &amp;&amp; rmdir &quot;$temp&quot;/* &quot;$temp&quot;" />
 
 		<exec command="${command}" checkreturn="true" />
+		-->
+
+		<unzip file="${build.cache.package}" todir="${package.extraction.dir}" />
+	</target>
+
+	<target name="typo3cms:package:extract:run" depends="project:cleanup, typo3cms:package:extract:prepare, typo3cms:package:extract:tar, typo3cms:package:extract:zip">
+		<move todir="../www">
+			<fileset dir="${package.extraction.dir}">
+				<include name="*/**" />
+			</fileset>
+		</move>
+
+		<delete dir="${package.extraction.dir}" />
 
 		<echo>The TYPO3 CMS Package was successfully extracted.</echo>
 	</target>

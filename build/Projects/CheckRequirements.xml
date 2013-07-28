@@ -10,42 +10,6 @@
 		<fail unless="isDownloaderAvailable" message="The downloader ${typo3.cms.downloader} is not available on your system!" />
 	</target>
 
-	<target name="check-requirements:archiver">
-		<if>
-			<equals arg1="${typo3.cms.format}" arg2="" />
-			<then>
-				<property name="selectedArchiver" value="tar" />
-				<exec command="which tar" returnProperty="isArchiverAvailable" />
-			</then>
-		</if>
-
-		<if>
-			<equals arg1="${typo3.cms.format}" arg2="zip" />
-			<then>
-				<property name="selectedArchiver" value="unzip" />
-				<exec command="which unzip" returnProperty="isArchiverAvailable" />
-			</then>
-		</if>
-
-		<fail unless="isArchiverAvailable" message="The archiving utility ${selectedArchiver} is not available on your system!" />
-	</target>
-
-	<target name="check-requirements:coreutils">
-		<if>
-			<equals arg1="${selectedArchiver}" arg2="unzip" />
-			<then>
-				<exec command="which mktemp" returnProperty="isMktempAvailable" />
-				<fail unless="isMktempAvailable" message="The `mktemp` command is not available on your system but is necessary for extracting the package format ${typo3.cms.format} with ${selectedArchiver}!" />
-			</then>
-		</if>
-
-		<exec command="which mv" returnProperty="isMvAvailable" />
-		<fail unless="isMvAvailable" message="The `mv` command is not available on your system!" />
-
-		<exec command="which rmdir" returnProperty="isRmdirAvailable" />
-		<fail unless="isRmdirAvailable" message="The `rmdir` command is not available on your system!" />
-	</target>
-
 	<target name="check-requirements:scm">
 		<exec command="which git" returnProperty="isGitAvailable" />
 		<fail unless="isGitAvailable" message="The `git` command is not available on your system!" />
@@ -59,7 +23,7 @@
 			property="isCurrentSSH2" />
 	</target>
 
-	<target name="check-requirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:archiver, check-requirements:coreutils, check-requirements:scm, check-requirements:php">
+	<target name="check-requirements:run" depends="check-requirements:os-info, check-requirements:downloader, check-requirements:scm, check-requirements:php">
 		<echo>All deployment requirements met.</echo>
 	</target>
 </project>
