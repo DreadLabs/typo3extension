@@ -66,7 +66,7 @@
 			<!--
 			<mapper classname="Mappers.CutDirsMapper" from="1" />
 			-->
-			<mapper type="regexp" from="^(.*)?${package.extraction.dir}\/(.*)" to="\2" />
+			<mapper type="regexp" from="^(.*)?${package.extraction.dir}/(.[^/]*)/(.*)" to="\3" />
 		</move>
 
 		<delete dir="${package.extraction.dir}" />
