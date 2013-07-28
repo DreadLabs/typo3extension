@@ -60,7 +60,7 @@
 	<target name="typo3cms:package:extract:run" depends="project:cleanup, typo3cms:package:extract:prepare, typo3cms:package:extract:tar, typo3cms:package:extract:zip">
 		<move todir="../www">
 			<fileset dir="${package.extraction.dir}">
-				<include name="*/**" />
+				<include name="**/**" />
 			</fileset>
 		</move>
 
