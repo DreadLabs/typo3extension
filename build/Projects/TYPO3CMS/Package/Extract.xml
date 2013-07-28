@@ -61,8 +61,8 @@
 		<move todir="../www">
 			<fileset dir="${package.extraction.dir}">
 				<include name="**/**" />
-				<mapper type="cutdirs" dirs="1" />
 			</fileset>
+			<mapper type="cutdirs" dirs="1" />
 		</move>
 
 		<delete dir="${package.extraction.dir}" />
