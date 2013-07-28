@@ -11,12 +11,17 @@
 	"require": {
 		"phing/phing": "2.5.*",
 		"dreadlabs/typo3-cms-phing-helper": "dev-master",
-		"dreadlabs/phing-ext": "dev-master"
+		"dreadlabs/phing-ext": "dev-master",
+		"pear-pear/Archive_Tar": "*"
 	},
 	"repositories": [
 		{
 			"type": "composer",
 			"url": "http://packages.van-tomas.de"
+		},
+		{
+			"type": "pear",
+			"url": "http://pear.php.net/"
 		}
 	]
 }
