@@ -6,13 +6,14 @@
 
 	<import file="./Projects/EvaluateTemplates.xml" />
 
-	<target name="kickstart:set-environment">
+	<target name="kickstart:prepare">
 		<property name="environment" value="dev" />
 		<property name="evaluate-templates.filterchain-id" value="kickstart" />
 		<!-- 17-01-2013 21:01 -->
 		<php function="date" returnProperty="kickstart.timestamp">
 			<param value="d-m-Y H:i" />
 		</php>
+		<guessextensionkey strip="1" property="guessed.extension.key" />
 	</target>
 
 	<target name="kickstart:conditions-met">
@@ -33,7 +34,7 @@
 	<target name="kickstart:get-extension-information" depends="kickstart:conditions-met">
 		<echo>Please tell me some basic information about your extension.</echo>
 
-		<input propertyname="extension.key" defaultValue="myext">Key</input>
+		<input propertyname="extension.key" defaultValue="${guessed.extension.key}">Key</input>
 
 		<input propertyname="extension.title">Title</input>
 		<input propertyname="extension.description">Description</input>
@@ -71,7 +72,7 @@
 		<exec command="git init --quiet ${extension.dir}" />
 	</target>
 
-	<target name="kickstart:run" depends="kickstart:set-environment, kickstart:get-extension-information, evaluate-templates:run, kickstart:cleanup, kickstart:init-scm">
+	<target name="kickstart:run" depends="kickstart:prepare, kickstart:get-extension-information, evaluate-templates:run, kickstart:cleanup, kickstart:init-scm">
 		<echo>Your extension was kickstarted with the following information:</echo>
 		<echo>Extension title: ${extension.title}</echo>
 		<echo>Extension description: ${extension.description}</echo>
