@@ -54,4 +54,18 @@
 			</fileset>
 		</delete>
 	</target>
+
+	<target name="project:copy-to-extension-dir:prepare">
+		<property name="environment" value="prod" />
+
+		<property name="evaluate-templates.filterchain-id" value="default" />
+
+		<guessextensionkey strip="1" property="extension.key" />
+	</target>
+
+	<target name="project:copy-to-extension-dir" depends="project:copy-to-extension-dir:prepare, evaluate-templates:run">
+		<copy todir="../www/typo3conf/ext/${extension.key}">
+			<fileset dir="../src" includes="**/**" excludes="${excludes.default}" />
+		</copy>
+	</target>
 </project>

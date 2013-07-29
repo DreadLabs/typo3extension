@@ -24,6 +24,6 @@
 	<target name="deploy:requirements" depends="select-target:run, check-requirements:run">
 	</target>
 
-	<target name="deploy:run" depends="deploy:requirements, typo3cms:prepare:run, remote:run">
+	<target name="deploy:run" depends="deploy:requirements, typo3cms:prepare:run, project:copy-to-extension-dir, remote:run">
 	</target>
 </project>
