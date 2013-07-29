@@ -75,6 +75,7 @@
 
 	<target name="kickstart:run" depends="kickstart:prepare, kickstart:get-extension-information, evaluate-templates:run, kickstart:cleanup, kickstart:init-scm">
 		<echo>Your extension was kickstarted with the following information:</echo>
+		<echo>Extension key: ${extension.key}</echo>
 		<echo>Extension title: ${extension.title}</echo>
 		<echo>Extension description: ${extension.description}</echo>
 		<echo>Extension category: ${extension.category}</echo>
