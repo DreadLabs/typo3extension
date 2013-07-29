@@ -4,6 +4,7 @@
 	<property file="./Properties/Build.properties" />
 	<property file="./Properties/Secret.properties" />
 
+	<import file="../vendor/dreadlabs/typo3-cms-phing-helper/Resources/Public/TaskDefinitions.xml" />
 	<import file="./Projects/EvaluateTemplates.xml" />
 
 	<target name="kickstart:prepare">
