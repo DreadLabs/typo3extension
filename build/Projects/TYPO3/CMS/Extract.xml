@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.Extract">
+<project name="TYPO3.CMS.Extract">
 
-	<target name="typo3cms:package:extract:prepare">
+	<target name="typo3:cms:extract:prepare">
 		<mktempdir prefix="t3e" property="package.extraction.dir" />
 		<echo>Successfully created temporary extraction directory: ${package.extraction.dir}</echo>
 
@@ -29,15 +29,15 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:extract:tar" if="isTarArchive">
+	<target name="typo3:cms:extract:tar" if="isTarArchive">
 		<untar file="${build.cache.package}" todir="${package.extraction.dir}" />
 	</target>
 
-	<target name="typo3cms:package:extract:zip" if="isZipArchive">
+	<target name="typo3:cms:extract:zip" if="isZipArchive">
 		<unzip file="${build.cache.package}" todir="${package.extraction.dir}" />
 	</target>
 
-	<target name="typo3cms:package:extract:run" depends="project:cleanup, typo3cms:package:extract:prepare, typo3cms:package:extract:tar, typo3cms:package:extract:zip">
+	<target name="typo3:cms:extract:run" depends="project:cleanup, typo3:cms:extract:prepare, typo3:cms:extract:tar, typo3:cms:extract:zip">
 		<echo>The TYPO3 CMS Package was successfully extracted.</echo>
 	</target>
 </project>

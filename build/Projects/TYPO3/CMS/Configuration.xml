@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.Configuration">
+<project name="TYPO3.CMS.Configuration">
 
-	<target name="typo3cms:package:configuration:prepare">
+	<target name="typo3:cms:configuration:prepare">
 		<condition property="isBlank">
 			<and>
 				<equals arg1="${typo3.cms.flavor}" arg2="blank" />
@@ -22,7 +22,7 @@
 		</condition>
 	</target>
 
-	<target name="typo3cms:package:configuration:install-tool">
+	<target name="typo3:cms:configuration:install-tool">
 		<if>
 			<istrue value="${typo3.cms.enableInstallTool}" />
 			<then>
@@ -31,17 +31,17 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:configuration:handle-symlinks-blank" if="isBlank">
+	<target name="typo3:cms:configuration:handle-symlinks-blank" if="isBlank">
 		<delete file="../www/typo3_src" />
 		<symlink target="../www/typo3_src" link="${target.symlink.typo3_src}" />
 	</target>
 
-	<target name="typo3cms:package:configuration:handle-symlinks-dummy" if="isDummy">
+	<target name="typo3:cms:configuration:handle-symlinks-dummy" if="isDummy">
 		<delete file="../www/typo3_src" />
 		<symlink target="../www/typo3_src" link="${target.symlink.typo3_src}" />
 	</target>
 
-	<target name="typo3cms:package:configuration:handle-symlinks" depends="typo3cms:package:configuration:handle-symlinks-blank, typo3cms:package:configuration:handle-symlinks-dummy">
+	<target name="typo3:cms:configuration:handle-symlinks" depends="typo3:cms:configuration:handle-symlinks-blank, typo3:cms:configuration:handle-symlinks-dummy">
 		<if>
 			<isfalse value="${target.symlink.index_php}" />
 			<then>
@@ -51,6 +51,6 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:configuration:run" depends="typo3cms:package:configuration:prepare, typo3cms:package:configuration:install-tool, typo3cms:package:configuration:handle-symlinks">
+	<target name="typo3:cms:configuration:run" depends="typo3:cms:configuration:prepare, typo3:cms:configuration:install-tool, typo3:cms:configuration:handle-symlinks">
 	</target>
 </project>

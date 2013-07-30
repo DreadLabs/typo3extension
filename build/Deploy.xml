@@ -9,11 +9,11 @@
 	<import file="./Projects/SelectTarget.xml" />
 	<import file="./Projects/CheckRequirements.xml" />
 	<import file="./Projects/EvaluateTemplates.xml" />
-	<import file="./Projects/TYPO3CMS/Prepare.xml" />
-	<import file="./Projects/TYPO3CMS/Package/Download.xml" />
-	<import file="./Projects/TYPO3CMS/Package/Extract.xml" />
-	<import file="./Projects/TYPO3CMS/Package/LocalConfiguration.xml" />
-	<import file="./Projects/TYPO3CMS/Package/Configuration.xml" />
+	<import file="./Projects/TYPO3/Prepare.xml" />
+	<import file="./Projects/TYPO3/CMS/Download.xml" />
+	<import file="./Projects/TYPO3/CMS/Extract.xml" />
+	<import file="./Projects/TYPO3/CMS/LocalConfiguration.xml" />
+	<import file="./Projects/TYPO3/CMS/Configuration.xml" />
 	<import file="./Projects/Project.xml" />
 	<import file="./Projects/Remote.xml" />
 	<import file="./Projects/Remote/Setup.xml" />
@@ -24,6 +24,6 @@
 	<target name="deploy:requirements" depends="select-target:run, check-requirements:run">
 	</target>
 
-	<target name="deploy:run" depends="deploy:requirements, typo3cms:prepare:run, project:copy-to-extension-dir, remote:run">
+	<target name="deploy:run" depends="deploy:requirements, typo3:prepare:run, project:copy-to-extension-dir, remote:run">
 	</target>
 </project>

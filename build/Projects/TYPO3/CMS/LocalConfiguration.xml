@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TYPO3CMS.Package.LocalConfiguration">
+<project name="TYPO3.CMS.LocalConfiguration">
 
-	<target name="typo3cms:package:localconfiguration:create-from-default">
+	<target name="typo3:cms:localconfiguration:create-from-default">
 		<if>
 			<not>
 				<available file="./Properties/LocalConfiguration.properties" />
@@ -53,13 +53,13 @@
 		</if>
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:generate" depends="typo3cms:package:localconfiguration:create-from-default">
+	<target name="typo3:cms:localconfiguration:generate" depends="typo3:cms:localconfiguration:create-from-default">
 		<generatelocalconfiguration
 			file="../www/typo3conf/LocalConfiguration.php"
 			propertyprefix="LocalConfiguration" />
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:merge-with-remote" depends="typo3cms:package:localconfiguration:generate">
+	<target name="typo3:cms:localconfiguration:merge-with-remote" depends="typo3:cms:localconfiguration:generate">
 		<!-- download remote LocalConfiguration file -->
 		<trycatch property="mergeWithRemoteStatus">
 			<try>
@@ -83,7 +83,7 @@
 		</trycatch>
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:cleanup" depends="typo3cms:package:localconfiguration:merge-with-remote">
+	<target name="typo3:cms:localconfiguration:cleanup" depends="typo3:cms:localconfiguration:merge-with-remote">
 		<echo>Committing LocalConfiguration.properties update.</echo>
 
 		<if>
@@ -99,7 +99,7 @@
 		<exec command="${command}" dir="../" />
 	</target>
 
-	<target name="typo3cms:package:localconfiguration:run" depends="typo3cms:package:localconfiguration:cleanup">
+	<target name="typo3:cms:localconfiguration:run" depends="typo3:cms:localconfiguration:cleanup">
 		<echo>LocalConfiguration.php was successfully generated &amp; updated.</echo>
 	</target>
 </project>
