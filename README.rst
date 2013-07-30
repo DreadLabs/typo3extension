@@ -256,5 +256,5 @@ the assumptions behind these opinions are:
 - You are using SSH to access the remote servers.
 - You're using `git`:code: to accomplish source code management tasks.
 - Deployment is only possible if you have committed your work and created an
-  appropriate tag. The latter is not required as a deployment also can be done
-  based upon a SHA1 commit object.
+  appropriate tag. The latter is not required but recommended as a deployment
+  also can be done based upon a SHA1 commit object.
