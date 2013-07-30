@@ -78,6 +78,40 @@ Create new deployment target
 Step through the wizard and enter the necessary information to create a new
 deployment target property file.
 
+Manage secret properties
+''''''''''''''''''''''''
+
+If you need to use other, target independend secret properties make use of the
+predefined properties file `build/Properties/Secret.properties`:code:. This file
+gets blacklisted for the SCM after executing the Kickstart project.
+
+Manage secret data in the project directory
+'''''''''''''''''''''''''''''''''''''''''''
+
+If you need to specify secret data (e.g. API keys) in your application code (e.g.
+TypoScript setup). Please follow the following step-by-step guide:
+
+1. Create the TypoScript configuration file suffixed with special file extension `.dist.`:code:
+   e.g.: src/Configuration/TypoScript/Constants/apikeys.dist.ts
+
+2. Instead of storing the constant value into the TypoScript file, define a placeholder
+   e.g.: plugin.tx_api.key = @@@API_KEY@@@
+
+3. Save the constant value into Secrets.properties which is excluded from SCM by default
+   e.g.: keys.api = 0123456789
+
+4. Extend the EvaluateTemplates default FilterChain located at `build/Projects/EvaluateTemplates/FilterChainDefault.xml`:code:
+   e.g.: <token key="API_KEY" value="${keys.api}" />
+
+5. Add the suffix-less TypoScript configuration file to your .gitignore to avoid
+   accidentally committing secret data
+   e.g. src/Configuration/TypoScript/Constants/apikeys.ts
+
+6. You can securely commit your *.dist.* TypoScript configuration files now.
+
+Please note, that this approach needs a strong team communication for exchanging
+the secret data credentials between team members.
+
 Requirements
 ------------
 
@@ -152,6 +186,14 @@ influence the deployment process.
 * **target.current.dir** - *string* - Symlink name at target machine which gets updated on deployment
 
   Default: `current`:code:
+
+* **target.releases.dir** - *string* - Name of directory to store releases in
+
+  Default: `releases`:code:
+
+* **target.releases.keep** - *integer* - Amount of releases to keep for rollbacks
+
+  Default: `5`:code:
 
 Target configuration
 ~~~~~~~~~~~~~~~~~~~~
