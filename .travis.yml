@@ -10,3 +10,4 @@ before_install:
 
 script:
   - find . -path "./build/*.xml" -exec xmllint --noout {} \;
+  - find . -path "./src/*.php" -exec php -l {} \;
