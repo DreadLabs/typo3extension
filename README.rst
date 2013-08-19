@@ -2,6 +2,9 @@
 typo3extension
 ==============
 
+.. image:: https://travis-ci.org/DreadLabs/typo3extension.png?branch=master
+  :target: https://travis-ci.org/DreadLabs/typo3extension
+
 A TYPO3 extension kickstart package for usage with composer dependency manager.
 
 .. contents:: :local:
