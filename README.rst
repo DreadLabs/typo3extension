@@ -264,3 +264,10 @@ the assumptions behind these opinions are:
 - Deployment is only possible if you have committed your work and created an
   appropriate tag. The latter is not required as a deployment also can be done
   based upon a SHA1 commit object.
+
+License
+-------
+
+This project is free software under the terms of the 
+GNU General Public License version 2 or any later version.
+The GNU/GPL license (version 2) is found in the file LICENSE.
