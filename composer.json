@@ -16,10 +16,6 @@
 	},
 	"repositories": [
 		{
-			"type": "composer",
-			"url": "http://packages.van-tomas.de"
-		},
-		{
 			"type": "pear",
 			"url": "http://pear.php.net/"
 		}
