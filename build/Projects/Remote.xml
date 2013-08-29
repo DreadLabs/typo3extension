@@ -5,25 +5,13 @@
 		<php expression="${target.releases.keep} + 1" returnProperty="superfluousReleasesStart" />
 	</target>
 
-	<target name="remote:cleanup-releases:seclib" unless="isCurrentSSH2">
+	<target name="remote:cleanup-releases" depends="remote:cleanup-releases:prepare">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
 			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
-	</target>
-
-	<target name="remote:cleanup-releases:ssh2" if="isCurrentSSH2">
-		<ssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
-	</target>
-
-	<target name="remote:cleanup-releases" depends="remote:cleanup-releases:prepare, remote:cleanup-releases:seclib, remote:cleanup-releases:ssh2">
 	</target>
 
 	<target name="remote:run" depends="project:is-clean, remote:release:upload:run, remote:release:extract:run, remote:release:update-symlink:run, remote:cleanup-releases">

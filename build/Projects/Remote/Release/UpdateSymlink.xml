@@ -5,25 +5,14 @@
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 	</target>
 
-	<target name="remote:release:update-symlink:seclib" unless="isCurrentSSH2">
+	<target name="remote:release:update-symlink:run" depends="remote:release:update-symlink:prepare">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
 			command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
-	</target>
 
-	<target name="remote:release:update-symlink:ssh2" if="isCurrentSSH2">
-		<ssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
-	</target>
-
-	<target name="remote:release:update-symlink:run" depends="remote:release:update-symlink:prepare, remote:release:update-symlink:seclib, remote:release:update-symlink:ssh2">
 		<echo>Successfully switched the release symlink</echo>
 	</target>
 </project>

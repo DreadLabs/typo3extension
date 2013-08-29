@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Remote.Release.Extract">
 
-	<target name="remote:release:extract:seclib" unless="isCurrentSSH2">
+	<target name="remote:release:extract:run">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
 			command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
-	</target>
 
-	<target name="remote:release:extract:ssh2" if="isCurrentSSH2">
-		<ssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
-	</target>
-
-	<target name="remote:release:extract:run" depends="remote:release:extract:seclib, remote:release:extract:ssh2">
 		<echo>Successfully extracted release</echo>
 	</target>
 </project>
