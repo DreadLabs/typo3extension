@@ -19,8 +19,8 @@ How to use
 
    .. code:: sh
 
-   	$ cd /path/to/your/development/downloads/directory
-   	$ curl -sS https://getcomposer.org/installer | php
+      $ cd /path/to/global/
+      $ curl -sS https://getcomposer.org/installer | php
 
 2. Init your new TYPO3 extension project
 
@@ -30,21 +30,21 @@ How to use
 
    .. code:: sh
 
-   	$ cd /path/to/your/projects/root/directory
-   	$ php /path/to/your/development/downloads/directory/composer.phar create-project dreadlabs/typo3extension ./YourExtensionKey
+      $ cd /path/to/your/projects/root/directory
+      $ php /path/to/global/composer.phar create-project dreadlabs/typo3extension ./YourExtensionKey
 
 3. Kickstart with basic information
 
    .. code:: sh
 
-   	$ cd YourExtensionKey
-   	$ vendor/bin/phing -f build/Kickstart.xml
+      $ cd YourExtensionKey
+      $ vendor/bin/phing -f build/Kickstart.xml
 
 4. Initial commit
 
    .. code:: sh
 
-   	$ git add . && git commit -m '[INIT] initial commit'
+      $ git add . && git commit -m '[INIT] initial commit'
 
 5. Start coding!
 
@@ -64,8 +64,8 @@ Deployment
 
 .. code:: sh
 
-	$ cd YourExtensionKey
-	$ vendor/bin/phing -f build/Deploy.xml -DdeployTo=[targetName]
+   $ cd YourExtensionKey
+   $ vendor/bin/phing -f build/Deploy.xml -DdeployTo=[targetName]
 
 Where as `[targetName]`:code: is the base name of one of the property files located at
 *build/Properties/Targets/*.
@@ -75,11 +75,14 @@ Create new deployment target
 
 .. code:: sh
 
-	$ cd YourExtensionKey
-	$ vendor/bin/phing -f build/NewTarget.xml
+   $ cd YourExtensionKey
+   $ vendor/bin/phing -f build/NewTarget.xml
 
 Step through the wizard and enter the necessary information to create a new
 deployment target property file.
+
+Best practices
+~~~~~~~~~~~~~~
 
 Manage secret properties
 ''''''''''''''''''''''''
@@ -95,22 +98,27 @@ If you need to specify secret data (e.g. API keys) in your application code (e.g
 TypoScript setup). Please follow the following step-by-step guide:
 
 1. Create the TypoScript configuration file suffixed with special file extension `.dist.`:code:
-   e.g.: src/Configuration/TypoScript/Constants/apikeys.dist.ts
+
+   e.g.: `src/Configuration/TypoScript/Constants/apikeys.dist.ts`:code:
 
 2. Instead of storing the constant value into the TypoScript file, define a placeholder
-   e.g.: plugin.tx_api.key = @@@API_KEY@@@
+
+   e.g.: `plugin.tx_api.key = @@@API_KEY@@@`:code:
 
 3. Save the constant value into Secrets.properties which is excluded from SCM by default
-   e.g.: keys.api = 0123456789
+
+   e.g.: `keys.api = 0123456789`:code:
 
 4. Extend the EvaluateTemplates default FilterChain located at `build/Projects/EvaluateTemplates/FilterChainDefault.xml`:code:
-   e.g.: <token key="API_KEY" value="${keys.api}" />
+
+   e.g.: `<token key="API_KEY" value="${keys.api}" />`:code:
 
 5. Add the suffix-less TypoScript configuration file to your .gitignore to avoid
    accidentally committing secret data
-   e.g. src/Configuration/TypoScript/Constants/apikeys.ts
 
-6. You can securely commit your *.dist.* TypoScript configuration files now.
+   e.g. `src/Configuration/TypoScript/Constants/apikeys.ts`:code:
+
+6. You can securely commit your `*.dist.*`:code: TypoScript configuration files now.
 
 Please note, that this approach needs a strong team communication for exchanging
 the secret data credentials between team members.
@@ -120,11 +128,6 @@ Requirements
 
 Currently this project requires a \*nix machine as it makes usage of some low
 level commands like `wget`:code:, `curl`:code:.
-
-I suggest you to install the PHP ssh2 extension (`libssh2-php`:code:) in order
-to make use of the PHP implementation for ssh/scp/sftp commands. If you can't
-install this PECL extension, this package falls back to `phpseclib/phpseclib`:code:
-package.
 
 Configuration
 -------------
