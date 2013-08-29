@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TYPO3.CMS.Database.Init">
+
+	<target name="typo3:cms:database:init:prepare">
+		<property
+			name="typo3.cms.db.initFile"
+			value="${target.path}/${target.releases.dir}/${release.id}/t3lib/stddb/tables.sql" />
+	</target>
+
+	<target name="typo3:cms:database:init:run" depends="typo3:cms:database:init:prepare">
+		<seclibssh
+			host="${target.hostname}"
+			port="${target.port}"
+			username="${target.username}"
+			password="${target.password}"
+			command="mysql -u${target.db.username} -p${target.db.password} --default-character-set=utf8 ${target.db.name} --execute=&quot;SOURCE ${typo3.cms.db.initFile}&quot;" />
+
+		<echo>Successfully imported t3lib/stddb/tables.sql.</echo>
+	</target>
+</project>
