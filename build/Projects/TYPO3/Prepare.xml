@@ -2,12 +2,6 @@
 <project name="TYPO3.Prepare">
 
 	<target name="typo3:prepare:download-and-extract" depends="typo3:cms:download:run, typo3:cms:extract:run">
-	</target>
-
-	<target name="typo3:prepare:configure" depends="typo3:cms:localconfiguration:run, typo3:cms:configuration:run">
-	</target>
-
-	<target name="typo3:prepare:run" depends="typo3:prepare:download-and-extract, typo3:prepare:configure">
 		<move todir="../www">
 			<fileset dir="${package.extraction.dir}">
 				<include name="**/**" />
@@ -42,6 +36,12 @@
 		</move>
 
 		<delete dir="${package.extraction.dir}" />
+	</target>
+
+	<target name="typo3:prepare:configure" depends="typo3:cms:localconfiguration:run, typo3:cms:configuration:run">
+	</target>
+
+	<target name="typo3:prepare:run" depends="typo3:prepare:download-and-extract, typo3:prepare:configure">
 
 		<echo>The TYPO3 CMS package was successfully prepared.</echo>
 	</target>
