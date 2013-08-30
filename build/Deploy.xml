@@ -14,6 +14,7 @@
 	<import file="./Projects/TYPO3/CMS/Extract.xml" />
 	<import file="./Projects/TYPO3/CMS/LocalConfiguration.xml" />
 	<import file="./Projects/TYPO3/CMS/Configuration.xml" />
+	<import file="./Projects/TYPO3/CMS/Database/Init.xml" />
 	<import file="./Projects/Project.xml" />
 	<import file="./Projects/Remote.xml" />
 	<import file="./Projects/Remote/Setup.xml" />
@@ -24,6 +25,6 @@
 	<target name="deploy:requirements" depends="select-target:run, check-requirements:run">
 	</target>
 
-	<target name="deploy:run" depends="deploy:requirements, typo3:prepare:run, project:copy-to-extension-dir, remote:run">
+	<target name="deploy:run" depends="deploy:requirements, typo3:prepare:run, project:copy-to-extension-dir, remote:run, typo3:cms:database:init:run">
 	</target>
 </project>
