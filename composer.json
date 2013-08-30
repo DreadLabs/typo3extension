@@ -1,23 +1,22 @@
 {
-	"name": "dreadlabs/typo3extension",
-	"type": "project",
-	"description": "Kickstarts a TYPO3 extension",
-	"authors": [
-		{
-			"name": "Thomas Juhnke",
-			"email": "typo3@van-tomas.de"
+	"name" : "dreadlabs/typo3extension",
+	"description" : "Kickstarts a TYPO3 extension",
+	"type" : "project",
+	"authors" : [{
+			"name" : "Thomas Juhnke",
+			"email" : "typo3@van-tomas.de"
 		}
 	],
-	"require": {
-		"phing/phing": "2.5.*",
-		"dreadlabs/typo3-cms-phing-helper": "dev-master",
-		"dreadlabs/phing-ext": "dev-master",
-		"pear-pear/Archive_Tar": "*"
+	"require" : {
+		"dreadlabs/phing-ext" : "dev-master",
+		"phing/phing" : "2.5.*",
+		"pear-pear/Archive_Tar" : "*",
+		"dreadlabs/typo3-cms-phing-helper" : "dev-master"
 	},
-	"repositories": [
-		{
-			"type": "pear",
-			"url": "http://pear.php.net/"
+	"minimum-stability" : "dev",
+	"repositories" : [{
+			"type" : "pear",
+			"url" : "http://pear.php.net/"
 		}
 	]
 }
