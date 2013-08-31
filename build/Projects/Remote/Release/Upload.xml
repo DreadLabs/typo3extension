@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Remote.Release.Upload">
 
-	<target name="remote:release:upload:prepare" depends="project:compress, remote:setup:new-release-directory">
+	<target name="remote:release:upload:prepare" depends="remote:setup:new-release-directory, project:compress">
 		<echo>Uploading files in progress, please be patient...</echo>
 
 		<resolvepath
