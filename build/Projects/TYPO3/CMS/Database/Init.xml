@@ -13,7 +13,7 @@
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
-			command="mysql -u${target.db.username} -p${target.db.password} --default-character-set=utf8 ${target.db.name} --execute=&quot;SOURCE ${typo3.cms.db.initFile}&quot;" />
+			command="mysql -u${target.db.username} -p${target.db.password} -h${target.db.host} --default-character-set=utf8 ${target.db.name} --execute=&quot;SOURCE ${typo3.cms.db.initFile}&quot;" />
 
 		<echo>Successfully imported t3lib/stddb/tables.sql.</echo>
 	</target>
