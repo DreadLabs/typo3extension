@@ -13,7 +13,6 @@
 		"pear-pear/Archive_Tar" : "*",
 		"dreadlabs/typo3-cms-phing-helper" : "dev-master"
 	},
-	"minimum-stability" : "dev",
 	"repositories" : [{
 			"type" : "pear",
 			"url" : "http://pear.php.net/"

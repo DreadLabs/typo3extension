@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "11f616c28eb1243933493927152ace19",
+    "hash": "c8c4142c53abd1bd751016d2ba81945a",
     "packages": [
         {
             "name": "dreadlabs/phing-ext",
@@ -11,17 +11,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DreadLabs/phing-ext.git",
-                "reference": "6224b685ee231c12f43f8b5e9099e4a243d70337"
+                "reference": "8abe03edae1be68353cfcd4329f8ffed5b815163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DreadLabs/phing-ext/zipball/6224b685ee231c12f43f8b5e9099e4a243d70337",
-                "reference": "6224b685ee231c12f43f8b5e9099e4a243d70337",
+                "url": "https://api.github.com/repos/DreadLabs/phing-ext/zipball/8abe03edae1be68353cfcd4329f8ffed5b815163",
+                "reference": "8abe03edae1be68353cfcd4329f8ffed5b815163",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.10",
-                "phpseclib/phpseclib": "dev-master#ebb1d53af57119c5d03a836432b7c7ff01059474"
+                "phpseclib/phpseclib": "0.3.*"
             },
             "require-dev": {
                 "phing/phing": "2.5.*",
@@ -44,7 +44,7 @@
                 }
             ],
             "description": "Tasks, types & filters for Phing",
-            "time": "2013-08-30 17:53:00"
+            "time": "2013-08-31 13:07:04"
         },
         {
             "name": "dreadlabs/typo3-cms-phing-helper",
@@ -167,16 +167,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "dev-master",
+            "version": "0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "ebb1d53af57119c5d03a836432b7c7ff01059474"
+                "reference": "fe3765fe1773c9d62985d05d5b5da24c921c4bd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ebb1d53af57119c5d03a836432b7c7ff01059474",
-                "reference": "ebb1d53af57119c5d03a836432b7c7ff01059474",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/fe3765fe1773c9d62985d05d5b5da24c921c4bd0",
+                "reference": "fe3765fe1773c9d62985d05d5b5da24c921c4bd0",
                 "shasum": ""
             },
             "require": {
@@ -237,7 +237,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2013-08-29 21:38:05"
+            "time": "2013-06-08 17:40:39"
         }
     ],
     "packages-dev": [
@@ -246,7 +246,7 @@
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "dreadlabs/phing-ext": 20,
         "dreadlabs/typo3-cms-phing-helper": 20
