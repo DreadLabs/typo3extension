@@ -11,7 +11,7 @@
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
-			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
+			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xargs rm -rf" />
 	</target>
 
 	<target name="remote:run" depends="project:is-clean, remote:release:upload:run, remote:release:extract:run, remote:release:update-symlink:run, remote:cleanup-releases">
