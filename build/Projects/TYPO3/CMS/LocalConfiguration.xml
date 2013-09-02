@@ -83,7 +83,27 @@
 		</trycatch>
 	</target>
 
-	<target name="typo3:cms:localconfiguration:cleanup" depends="typo3:cms:localconfiguration:merge-with-remote">
+	<target name="typo3:cms:localconfiguration:validate" depends="typo3:cms:localconfiguration:merge-with-remote">
+		<if>
+			<equals arg1="${LocalConfiguration.SYS.encryptionKey}" arg2="" />
+			<then>
+				<property name="LocalConfigurationValidation" value="failed" />
+				<echo>SYS.encryptionKey must be specified!</echo>
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${LocalConfiguration.BE.installToolPassword}" arg2="" />
+			<then>
+				<property name="LocalConfigurationValidation" value="failed" />
+				<echo>BE.installToolPassword must be specified!</echo>
+			</then>
+		</if>
+
+		<fail if="LocalConfigurationValidation" message="The LocalConfiguration validation failed. Please investigate the output messages to see whats wrong!" />
+	</target>
+
+	<target name="typo3:cms:localconfiguration:cleanup" depends="typo3:cms:localconfiguration:validate">
 		<echo>Committing LocalConfiguration.properties update.</echo>
 
 		<if>
