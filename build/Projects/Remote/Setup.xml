@@ -7,7 +7,7 @@
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
-			command="mkdir -m ${target.releases.dir.mode} -p ${target.path}/${target.releases.dir}" />
+			command="mkdir -p ${target.path}/${target.releases.dir} &amp;&amp; chmod ${target.releases.dir.mode} ${target.path}/${target.releases.dir}" />
 
 		<echo>Successfully created releases directory ${target.path}/${target.releases.dir}</echo>
 	</target>
@@ -18,7 +18,7 @@
 			port="${target.port}"
 			username="${target.username}"
 			password="${target.password}"
-			command="mkdir -m ${target.releases.dir.mode} -p ${target.path}/${target.releases.dir}/${release.id}" />
+			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; chmod ${target.releases.dir.mode} ${target.path}/${target.releases.dir}/${release.id}" />
 
 		<echo>Successfully created new release directory ${target.path}/${target.releases.dir}/${release.id}</echo>
 	</target>
