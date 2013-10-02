@@ -25,6 +25,10 @@
 		<input propertyName="newtarget.db.username" message="DB username" />
 		<input propertyName="newtarget.db.password" message="DB password" />
 
+		<input propertyName="newtarget.testing" message="Perform unit tests" validArgs="true,false" defaultValue="true" />
+
+		<input propertyName="newtarget.php.bin" message="PHP binary" defaultValue="php" />
+
 		<!--
 			feel free to adjust the NewTarget.properties template suiting your needs
 			and create new input-tasks below

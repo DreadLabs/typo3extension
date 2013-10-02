@@ -248,6 +248,10 @@ All target properties get prefixed by `target.`:code: during the deployment proc
 * **db.username** - *string* - Database user name of the target
 * **db.password** - *string* - Database password of the target
 
+* **testing** - *boolean** - Flags if the (unit) tests should be executed on the target.
+* **php.bin** - *string** - Name of the PHP binary on the target machine.
+
+
 Assumptions
 -----------
 
