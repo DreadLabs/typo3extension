@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Remote.Release.UpdateSymlink">
+<project name="Target.Release.UpdateSymlink">
 
-	<target name="remote:release:update-symlink:prepare">
+	<target name="target:release:update-symlink:prepare">
 		<echo>Switching `current` symlink ${target.current.dir} to release ${release.id}</echo>
 	</target>
 
-	<target name="remote:release:update-symlink:run" depends="remote:release:update-symlink:prepare">
+	<target name="target:release:update-symlink:run" depends="target:release:update-symlink:prepare">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"

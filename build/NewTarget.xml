@@ -3,7 +3,15 @@
 
 	<target name="newtarget:get-input">
 		<!-- used in file name -->
-		<input propertyName="newtarget.targetName" message="Name of the new target" defaultValue="Remote" />
+		<!--
+			examples:
+			- Development
+			- Testing (exists)
+			- Integration
+			- Staging (exists)
+			- Production (exists)
+		-->
+		<input propertyName="newtarget.targetName" message="Name of the new target" defaultValue="Development" />
 
 		<input propertyName="newtarget.hostname" message="Hostname" />
 
@@ -28,6 +36,8 @@
 		<input propertyName="newtarget.testing" message="Perform unit tests" validArgs="true,false" defaultValue="true" />
 
 		<input propertyName="newtarget.php.bin" message="PHP binary" defaultValue="php" />
+
+		<input propertyName="newtarget.islocal" message="Is local" validArgs="true,false" defaultValue="false" />
 
 		<!--
 			feel free to adjust the NewTarget.properties template suiting your needs

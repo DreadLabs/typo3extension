@@ -59,9 +59,9 @@
 			propertyprefix="LocalConfiguration" />
 	</target>
 
-	<target name="typo3:cms:localconfiguration:merge-with-remote" depends="typo3:cms:localconfiguration:generate">
-		<!-- download remote LocalConfiguration file -->
-		<trycatch property="mergeWithRemoteStatus">
+	<target name="typo3:cms:localconfiguration:merge" depends="typo3:cms:localconfiguration:generate">
+		<!-- download LocalConfiguration file from target -->
+		<trycatch property="mergeStatus">
 			<try>
 				<seclibscp
 					username="${target.username}"
@@ -77,13 +77,13 @@
 					remotefile="${build.cache.dir}/LocalConfiguration.php" />
 			</try>
 			<catch>
-				<echo>Merging remote LocalConfiguration.php failed because of the following reason:</echo>
-				<echo>${mergeWithRemoteStatus}</echo>
+				<echo>Merging LocalConfiguration.php failed because of the following reason:</echo>
+				<echo>${mergeStatus}</echo>
 			</catch>
 		</trycatch>
 	</target>
 
-	<target name="typo3:cms:localconfiguration:cleanup" depends="typo3:cms:localconfiguration:merge-with-remote">
+	<target name="typo3:cms:localconfiguration:cleanup" depends="typo3:cms:localconfiguration:merge">
 		<echo>Committing LocalConfiguration.properties update.</echo>
 
 		<if>

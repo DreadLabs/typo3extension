@@ -181,7 +181,7 @@ influence the deployment process.
 
 * **build.cache.dir** - *(string)* - Build cache directory relative to build directory
 
-  *Downloaded packages or remote LocalConfiguration.php gets cached here.*
+  *Downloaded packages or target's LocalConfiguration.php gets cached here.*
 
   Default: `../.build-cache/`:code:
 
@@ -250,6 +250,7 @@ All target properties get prefixed by `target.`:code: during the deployment proc
 
 * **testing** - *(boolean)* - Flags if the (unit) tests should be executed on the target.
 * **php.bin** - *(string)* - Name of the PHP binary on the target machine.
+* **islocal** - *(boolean)* - Flags if the target is a local machine.
 
 
 Assumptions
@@ -263,7 +264,7 @@ This project package is "opinionated software", which means it has very firm ide
 about how things ought to be done, and tries to force those ideas on you. Some of
 the assumptions behind these opinions are:
 
-- You are using SSH to access the remote servers.
+- You are using SSH to access the target machines.
 - You're using `git`:code: to accomplish source code management tasks.
 - Deployment is only possible if you have committed your work and created an
   appropriate tag. The latter is not required but recommended as a deployment

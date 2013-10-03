@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Remote.Setup">
+<project name="Target.Setup">
 
-	<target name="remote:setup:releases-directory">
+	<target name="target:setup:releases-directory">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
@@ -12,7 +12,7 @@
 		<echo>Successfully created releases directory ${target.path}/${target.releases.dir}</echo>
 	</target>
 
-	<target name="remote:setup:new-release-directory" depends="remote:setup:releases-directory, project:get-release-id">
+	<target name="target:setup:new-release-directory" depends="target:setup:releases-directory, project:get-release-id">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"

@@ -15,15 +15,15 @@
 	<import file="./Projects/TYPO3/CMS/LocalConfiguration.xml" />
 	<import file="./Projects/TYPO3/CMS/Configuration.xml" />
 	<import file="./Projects/Project.xml" />
-	<import file="./Projects/Remote.xml" />
-	<import file="./Projects/Remote/Setup.xml" />
-	<import file="./Projects/Remote/Release/Upload.xml" />
-	<import file="./Projects/Remote/Release/Extract.xml" />
-	<import file="./Projects/Remote/Release/UpdateSymlink.xml" />
+	<import file="./Projects/Target.xml" />
+	<import file="./Projects/Target/Setup.xml" />
+	<import file="./Projects/Target/Release/Upload.xml" />
+	<import file="./Projects/Target/Release/Extract.xml" />
+	<import file="./Projects/Target/Release/UpdateSymlink.xml" />
 
 	<target name="deploy:requirements" depends="select-target:run, check-requirements:run">
 	</target>
 
-	<target name="deploy:run" depends="deploy:requirements, typo3:prepare:run, project:copy-to-extension-dir, remote:run">
+	<target name="deploy:run" depends="deploy:requirements, typo3:prepare:run, project:copy-to-extension-dir, target:run">
 	</target>
 </project>

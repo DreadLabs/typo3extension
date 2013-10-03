@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Remote">
+<project name="Target">
 
-	<target name="remote:cleanup-releases:prepare">
+	<target name="target:cleanup-releases:prepare">
 		<php expression="${target.releases.keep} + 1" returnProperty="superfluousReleasesStart" />
 	</target>
 
-	<target name="remote:cleanup-releases" depends="remote:cleanup-releases:prepare">
+	<target name="target:cleanup-releases" depends="target:cleanup-releases:prepare">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"
@@ -14,6 +14,6 @@
 			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
 	</target>
 
-	<target name="remote:run" depends="project:is-clean, remote:release:upload:run, remote:release:extract:run, remote:release:update-symlink:run, remote:cleanup-releases">
+	<target name="target:run" depends="project:is-clean, target:release:upload:run, target:release:extract:run, target:release:update-symlink:run, target:cleanup-releases">
 	</target>
 </project>

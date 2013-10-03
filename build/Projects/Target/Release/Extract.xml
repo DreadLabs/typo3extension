@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Remote.Release.Extract">
+<project name="Target.Release.Extract">
 
-	<target name="remote:release:extract:run">
+	<target name="target:release:extract:run">
 		<seclibssh
 			host="${target.hostname}"
 			port="${target.port}"

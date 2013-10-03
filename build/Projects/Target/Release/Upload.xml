@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Remote.Release.Upload">
+<project name="Target.Release.Upload">
 
-	<target name="remote:release:upload:prepare" depends="project:compress, remote:setup:new-release-directory">
+	<target name="target:release:upload:prepare" depends="project:compress, target:setup:new-release-directory">
 		<echo>Uploading files in progress, please be patient...</echo>
 
 		<resolvepath
@@ -9,7 +9,7 @@
 			file="${build.cache.dir}${release.id}.tar.gz" />
 	</target>
 
-	<target name="remote:release:upload:run" depends="remote:release:upload:prepare">
+	<target name="target:release:upload:run" depends="target:release:upload:prepare">
 		<seclibsftp
 				host="${target.hostname}"
 				port="${target.port}"
