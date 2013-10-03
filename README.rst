@@ -167,37 +167,37 @@ influence the deployment process.
 
   Valid values: `tar`:code:, `zip`:code:
 
-* **typo3.cms.defaultConfigurationDirectory** - *string* - Default configuration file path relative to build dir.
+* **typo3.cms.defaultConfigurationDirectory** - *(string)* - Default configuration file path relative to build dir.
 
   Default: `../www/t3lib/stddb/`:code:
 
-* **typo3.cms.defaultConfigurationFile** - *string* - Default configuration file name
+* **typo3.cms.defaultConfigurationFile** - *(string)* - Default configuration file name
 
   Default: `DefaultConfiguration.php`:code:
 
-* **typo3.cms.enableInstallTool** - *boolean* - Flags if the install tool should be enabled
+* **typo3.cms.enableInstallTool** - *(boolean)* - Flags if the install tool should be enabled
 
   Default: `true`:code:
 
-* **build.cache.dir** - *string* - Build cache directory relative to build directory
+* **build.cache.dir** - *(string)* - Build cache directory relative to build directory
 
   *Downloaded packages or remote LocalConfiguration.php gets cached here.*
 
   Default: `../.build-cache/`:code:
 
-* **build.cache.package** - *string* - Build cache package path & name
+* **build.cache.package** - *(string)* - Build cache package path & name
 
   Default: `${build.cache.dir}typo3cms${typo3.cms.version}.pkg`:code:
 
-* **target.current.dir** - *string* - Symlink name at target machine which gets updated on deployment
+* **target.current.dir** - *(string)* - Symlink name at target machine which gets updated on deployment
 
   Default: `current`:code:
 
-* **target.releases.dir** - *string* - Name of directory to store releases in
+* **target.releases.dir** - *(string)* - Name of directory to store releases in
 
   Default: `releases`:code:
 
-* **target.releases.keep** - *integer* - Amount of releases to keep for rollbacks
+* **target.releases.keep** - *(integer)* - Amount of releases to keep for rollbacks
 
   Default: `5`:code:
 
@@ -210,20 +210,20 @@ project.
 
 All target properties get prefixed by `target.`:code: during the deployment process.
 
-* **hostname** - *string* - Name (or IP address) of the target machine
-* **port** - *integer* - Port number of the target machine
+* **hostname** - *(string)* - Name (or IP address) of the target machine
+* **port** - *(integer)* - Port number of the target machine
 
   *Used during deployment via scp/ssh*
 
   Example: 22
 
-* **username** - *string* - Target machine authentification user name.
-* **password** - *string* - Target machine authentification password.
-* **path** - *string* - Target machine deployment path
+* **username** - *(string)* - Target machine authentification user name.
+* **password** - *(string)* - Target machine authentification password.
+* **path** - *(string)* - Target machine deployment path
 
   *The contents of www/ will be copied into this directory*
 
-* **symlink.typo3_src** - *string* - Specifies the typo3_src symlink target
+* **symlink.typo3_src** - *(string)* - Specifies the typo3_src symlink target
 
   *Specify a path to:*
 
@@ -232,7 +232,7 @@ All target properties get prefixed by `target.`:code: during the deployment proc
 
   *Set this to an empty value to not change anything regarding the typo3_src symlink.*
 
-* **symlink.index_php** - *boolean* - Flags if the index.php symlink should be used.
+* **symlink.index_php** - *(boolean)* - Flags if the index.php symlink should be used.
 
   *On some systems the index.php may not be symlinked.*
 
@@ -240,16 +240,16 @@ All target properties get prefixed by `target.`:code: during the deployment proc
 
   `true`:code:: leave symlink
 
-* **db.host** - *string* - Hostname of the targets DBMS
+* **db.host** - *(string)* - Hostname of the targets DBMS
 
   Example: `127.0.0.1`
 
-* **db.name** - *string* - Database name of the target
-* **db.username** - *string* - Database user name of the target
-* **db.password** - *string* - Database password of the target
+* **db.name** - *(string)* - Database name of the target
+* **db.username** - *(string)* - Database user name of the target
+* **db.password** - *(string)* - Database password of the target
 
-* **testing** - *boolean** - Flags if the (unit) tests should be executed on the target.
-* **php.bin** - *string** - Name of the PHP binary on the target machine.
+* **testing** - *(boolean)* - Flags if the (unit) tests should be executed on the target.
+* **php.bin** - *(string)* - Name of the PHP binary on the target machine.
 
 
 Assumptions
