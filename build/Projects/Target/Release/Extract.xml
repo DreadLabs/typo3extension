@@ -7,7 +7,7 @@
 			value="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
 
 		<if>
-			<istrue value="${target.islocal}">
+			<istrue value="${target.islocal}" />
 			<then>
 				<exec command="${target.release.extract.command}" checkreturn="true" />
 			</then>
