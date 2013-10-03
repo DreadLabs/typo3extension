@@ -73,8 +73,8 @@
 					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
 
 				<mergelocalconfiguration
-					localfile="../www/typo3conf/LocalConfiguration.php"
-					remotefile="${build.cache.dir}/LocalConfiguration.php" />
+					base="../www/typo3conf/LocalConfiguration.php"
+					update="${build.cache.dir}/LocalConfiguration.php" />
 			</try>
 			<catch>
 				<echo>Merging LocalConfiguration.php failed because of the following reason:</echo>
