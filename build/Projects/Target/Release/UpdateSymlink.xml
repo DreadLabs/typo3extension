@@ -6,12 +6,24 @@
 	</target>
 
 	<target name="target:release:update-symlink:run" depends="target:release:update-symlink:prepare">
-		<seclibssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
+		<property
+			name="target.release.update-symlink.command"
+			value="ln -snf ${target.path}/${target.releases.dir}/${release.id} ${target.path}/${target.current.dir}" />
+
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<exec command="${target.release.update-symlink.command}" checkreturn="true" />
+			</then>
+			<else>
+				<seclibssh
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					command="${target.release.update-symlink.command}" />
+			</else>
+		</if>
 
 		<echo>Successfully switched the release symlink</echo>
 	</target>

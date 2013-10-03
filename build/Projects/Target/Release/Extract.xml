@@ -2,12 +2,24 @@
 <project name="Target.Release.Extract">
 
 	<target name="target:release:extract:run">
-		<seclibssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
+		<property
+			name="target.release.extract.command"
+			value="cd ${target.path}/${target.releases.dir}/${release.id} &amp;&amp; tar xzf ${release.id}.tar.gz &amp;&amp; rm -f ${release.id}.tar.gz" />
+
+		<if>
+			<istrue value="${target.islocal}">
+			<then>
+				<exec command="${target.release.extract.command}" checkreturn="true" />
+			</then>
+			<else>
+				<seclibssh
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					command="${target.release.extract.command}" />
+			</else>
+		</if>
 
 		<echo>Successfully extracted release</echo>
 	</target>

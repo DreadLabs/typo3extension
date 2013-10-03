@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Target.Release.Copy">
+
+	<target name="target:release:copy:prepare" depends="project:compress, target:setup:new-release-directory">
+		<echo>Copying files in progress, please be patient...</echo>
+
+		<resolvepath
+			propertyName="release.package"
+			file="${build.cache.dir}${release.id}.tar.gz" />
+	</target>
+
+	<target name="target:release:copy:run" depends="target:release:copy:prepare">
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<copy
+					file="${release.package}"
+					todir="${target.path}/${target.releases.dir}/${release.id}/" />
+			</then>
+			<else>
+				<seclibsftp
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					todir="${target.path}/${target.releases.dir}/${release.id}/"
+					file="${release.package}" />
+			</else>
+		</if>
+
+		<echo>Successfully copied release ${release.id} to ${target.path}/${target.releases.dir}/${release.id}/</echo>
+	</target>
+</project>

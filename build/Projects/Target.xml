@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Target">
 
+	<target name="target:get-localconfiguration">
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<copy
+					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php"
+					todir="${build.cache.dir}" />
+			</then>
+			<else>
+				<seclibscp
+					username="${target.username}"
+					password="${target.password}"
+					host="${target.hostname}"
+					port="${target.port}"
+					fetch="true"
+					todir="${build.cache.dir}"
+					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
+			</else>
+		</if>
+	</target>
+
 	<target name="target:cleanup-releases:prepare">
 		<php expression="${target.releases.keep} + 1" returnProperty="superfluousReleasesStart" />
 	</target>
 
 	<target name="target:cleanup-releases" depends="target:cleanup-releases:prepare">
-		<seclibssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
+		<property
+				name="target.cleanup-releases.command"
+				value="ls -1dt ${target.path}/${target.releases.dir}/* | tail -n +${superfluousReleasesStart} | xarg rm -rf" />
+
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<exec command="${target.cleanup-releases.command}" checkreturn="true" />
+			</then>
+			<else>
+				<seclibssh
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					command="${target.cleanup-releases.command}" />
+			</else>
+		</if>
 	</target>
 
-	<target name="target:run" depends="project:is-clean, target:release:upload:run, target:release:extract:run, target:release:update-symlink:run, target:cleanup-releases">
+	<target name="target:run" depends="project:is-clean, target:release:copy:run, target:release:extract:run, target:release:update-symlink:run, target:cleanup-releases">
 	</target>
 </project>

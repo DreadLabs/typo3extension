@@ -17,7 +17,7 @@
 	<import file="./Projects/Project.xml" />
 	<import file="./Projects/Target.xml" />
 	<import file="./Projects/Target/Setup.xml" />
-	<import file="./Projects/Target/Release/Upload.xml" />
+	<import file="./Projects/Target/Release/Copy.xml" />
 	<import file="./Projects/Target/Release/Extract.xml" />
 	<import file="./Projects/Target/Release/UpdateSymlink.xml" />
 

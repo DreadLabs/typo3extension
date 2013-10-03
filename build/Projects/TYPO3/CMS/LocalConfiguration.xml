@@ -59,19 +59,9 @@
 			propertyprefix="LocalConfiguration" />
 	</target>
 
-	<target name="typo3:cms:localconfiguration:merge" depends="typo3:cms:localconfiguration:generate">
-		<!-- download LocalConfiguration file from target -->
+	<target name="typo3:cms:localconfiguration:merge" depends="typo3:cms:localconfiguration:generate, target:get-localconfiguration">
 		<trycatch property="mergeStatus">
 			<try>
-				<seclibscp
-					username="${target.username}"
-					password="${target.password}"
-					host="${target.hostname}"
-					port="${target.port}"
-					fetch="true"
-					todir="${build.cache.dir}"
-					file="${target.path}/${target.current.dir}/typo3conf/LocalConfiguration.php" />
-
 				<mergelocalconfiguration
 					base="../www/typo3conf/LocalConfiguration.php"
 					update="${build.cache.dir}/LocalConfiguration.php" />

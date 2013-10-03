@@ -2,23 +2,47 @@
 <project name="Target.Setup">
 
 	<target name="target:setup:releases-directory">
-		<seclibssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="mkdir -p ${target.path}/${target.releases.dir}" />
+		<property
+			name="target.setup.releases-directory.command"
+			value="mkdir -p ${target.path}/${target.releases.dir}" />
+
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<exec command="${target.setup.releases-directory.command}" checkreturn="true" />
+			</then>
+			<else>
+				<seclibssh
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					command="${target.setup.releases-directory.command}" />
+			</else>
+		</if>
 
 		<echo>Successfully created releases directory ${target.path}/${target.releases.dir}</echo>
 	</target>
 
 	<target name="target:setup:new-release-directory" depends="target:setup:releases-directory, project:get-release-id">
-		<seclibssh
-			host="${target.hostname}"
-			port="${target.port}"
-			username="${target.username}"
-			password="${target.password}"
-			command="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+		<property
+			name="target.setup.new-release-directory.command"
+			value="mkdir -p ${target.path}/${target.releases.dir}/${release.id}" />
+
+		<if>
+			<istrue value="${target.islocal}" />
+			<then>
+				<exec command="${target.setup.new-release-directory.command}" checkreturn="true" />
+			</then>
+			<else>
+				<seclibssh
+					host="${target.hostname}"
+					port="${target.port}"
+					username="${target.username}"
+					password="${target.password}"
+					command="${target.setup.new-release-directory.command}" />
+			</else>
+		</if>
 
 		<echo>Successfully created new release directory ${target.path}/${target.releases.dir}/${release.id}</echo>
 	</target>
